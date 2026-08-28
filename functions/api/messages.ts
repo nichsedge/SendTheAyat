@@ -3,11 +3,17 @@ export async function onRequestGet(context: any) {
   const id = url.searchParams.get('id');
   const q = url.searchParams.get('q')?.toLowerCase().trim();
   const limit = parseInt(url.searchParams.get('limit') || '50', 10);
-  const db = context.env.DB;
+  
+  // Support both DB and sendtheayat_db bindings
+  const db = context.env.DB || context.env.sendtheayat_db || context.env.SENDTHEAYAT_DB;
 
   try {
     if (!db) {
-      return new Response(JSON.stringify({ success: false, error: 'D1 not bound' }), {
+      return new Response(JSON.stringify({ 
+        success: false, 
+        error: 'D1 not bound', 
+        availableKeys: Object.keys(context.env || {}) 
+      }), {
         status: 500,
         headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
       });
@@ -96,14 +102,14 @@ export async function onRequestGet(context: any) {
 }
 
 export async function onRequestPost(context: any) {
-  const db = context.env.DB;
+  const db = context.env.DB || context.env.sendtheayat_db || context.env.SENDTHEAYAT_DB;
   try {
     const body: any = await context.request.json();
     const id = body.id || `msg-${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 6)}`;
     const createdAt = body.createdAt || Date.now();
 
     if (!db) {
-      return new Response(JSON.stringify({ success: false, error: 'D1 not bound' }), {
+      return new Response(JSON.stringify({ success: false, error: 'D1 not bound', availableKeys: Object.keys(context.env || {}) }), {
         status: 500,
         headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
       });

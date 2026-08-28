@@ -3,6 +3,13 @@
   "name": "sendtheayat",
   "compatibility_date": "2026-08-28",
   "pages_build_output_dir": "out",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "sendtheayat-db",
+      "database_id": "4c418e55-8899-4d57-9e62-362baab4aaa9"
+    }
+  ],
   "observability": {
     "enabled": true
   }
