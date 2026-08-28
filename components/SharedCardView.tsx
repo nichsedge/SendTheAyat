@@ -72,8 +72,8 @@ export default function SharedCardView({
 
     // Trigger subtle joyful confetti
     confetti({
-      particleCount: 30,
-      spread: 60,
+      particleCount: 25,
+      spread: 50,
       origin: { y: 0.8 },
       colors: ['#047857', '#F59E0B', '#10B981', '#E2DFD2'],
       disableForReducedMotion: true,
@@ -111,13 +111,13 @@ export default function SharedCardView({
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-14 animate-fadeIn">
+    <div className="max-w-4xl mx-auto px-3.5 sm:px-6 py-6 sm:py-12 md:py-14 animate-fadeIn">
       {/* Top Banner / Notification */}
       {isCreator && (
-        <div className="mb-6 p-4 rounded-2xl bg-emerald-900/10 border border-emerald-900/20 text-emerald-950 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
+        <div className="mb-4 sm:mb-6 p-3.5 sm:p-4 rounded-2xl bg-emerald-900/10 border border-emerald-900/20 text-emerald-950 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-2xs">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-emerald-800 text-white flex items-center justify-center shrink-0">
-              <Check className="w-4 h-4" />
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-emerald-800 text-white flex items-center justify-center shrink-0">
+              <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </div>
             <div>
               <p className="text-xs sm:text-sm font-semibold">Link Personal Berhasil Dibuat!</p>
@@ -130,7 +130,7 @@ export default function SharedCardView({
             id="btn-copy-top-banner"
             type="button"
             onClick={handleCopyLink}
-            className="px-4 py-2 rounded-xl bg-emerald-900 hover:bg-emerald-950 text-white text-xs font-medium transition-all flex items-center gap-1.5 shadow-xs shrink-0 active:scale-95"
+            className="w-full sm:w-auto px-4 py-2 rounded-xl bg-emerald-900 hover:bg-emerald-950 text-white text-xs font-medium transition-all flex items-center justify-center gap-1.5 shadow-xs shrink-0 active:scale-95"
           >
             {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
             <span>{copied ? 'Tersalin!' : 'Salin Link'}</span>
@@ -142,30 +142,30 @@ export default function SharedCardView({
       <div
         ref={cardRef}
         id="exportable-spiritual-card"
-        className={`p-6 sm:p-10 md:p-12 rounded-3xl border transition-all relative shadow-md ${themeConfig.bgClass} ${themeConfig.borderClass}`}
+        className={`p-4 sm:p-8 md:p-12 rounded-3xl border transition-all relative shadow-sm ${themeConfig.bgClass} ${themeConfig.borderClass}`}
       >
         {/* Subtle Decorative Geometric Top Motif */}
-        <div className="flex items-center justify-center gap-3 mb-6 opacity-40">
-          <div className="h-px bg-current flex-1 max-w-[80px]" />
+        <div className="flex items-center justify-center gap-3 mb-4 sm:mb-6 opacity-40">
+          <div className="h-px bg-current flex-1 max-w-[60px] sm:max-w-[80px]" />
           <span className="text-xs font-serif">۞</span>
-          <div className="h-px bg-current flex-1 max-w-[80px]" />
+          <div className="h-px bg-current flex-1 max-w-[60px] sm:max-w-[80px]" />
         </div>
 
         {/* Card Inside Wrapper */}
-        <div className={`p-6 sm:p-9 rounded-2xl border backdrop-blur-xs ${themeConfig.cardBgClass}`}>
+        <div className={`p-4 sm:p-7 md:p-9 rounded-2xl border backdrop-blur-xs ${themeConfig.cardBgClass}`}>
           {/* Header Bar */}
-          <div className="pb-5 mb-5 border-b border-zinc-200/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="pb-4 mb-4 border-b border-zinc-200/60 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
             <div>
-              <span className="text-[11px] uppercase tracking-widest font-semibold opacity-60 block mb-0.5">
+              <span className="text-[10px] uppercase tracking-widest font-semibold opacity-60 block mb-0.5">
                 Pesan Khusus Untuk:
               </span>
-              <h2 className="text-xl sm:text-2xl font-semibold text-zinc-900 font-serif-elegant">
+              <h2 className="text-lg sm:text-2xl font-semibold text-zinc-900 font-serif-elegant">
                 {message.recipientName || 'Untukmu yang Istimewa'}
               </h2>
             </div>
 
-            <div className="flex items-center gap-2 self-start sm:self-auto">
-              <span className={`text-xs px-3 py-1 rounded-full font-semibold ${themeConfig.accentBadgeClass}`}>
+            <div className="flex items-center justify-between sm:justify-end gap-2">
+              <span className={`text-[11px] sm:text-xs px-3 py-1 rounded-full font-semibold ${themeConfig.accentBadgeClass}`}>
                 QS. {message.surahName} : {message.verseNumber}
               </span>
               <button
@@ -173,7 +173,7 @@ export default function SharedCardView({
                 type="button"
                 onClick={handleToggleBookmark}
                 title={isSaved ? 'Hapus dari simpanan' : 'Simpan ayat ini'}
-                className="p-1.5 rounded-full hover:bg-black/5 transition-colors"
+                className="p-1.5 rounded-full hover:bg-black/5 transition-colors active:scale-90"
               >
                 {isSaved ? (
                   <BookmarkCheck className="w-4 h-4 text-emerald-800" />
@@ -186,7 +186,7 @@ export default function SharedCardView({
 
           {/* Audio Recitation Player if available */}
           {message.audioUrl && (
-            <div className="mb-6 flex justify-center sm:justify-start">
+            <div className="mb-4 sm:mb-6">
               <AudioPlayer
                 audioUrl={message.audioUrl}
                 surahName={message.surahName}
@@ -197,56 +197,56 @@ export default function SharedCardView({
 
           {/* Arabic Calligraphy / Uthmani Typography */}
           <div
-            className={`py-6 sm:py-10 text-right font-arabic text-2xl sm:text-4xl md:text-[2.6rem] font-normal leading-[2.4] sm:leading-[2.6] select-all ${themeConfig.arabicColorClass}`}
+            className={`py-4 sm:py-8 md:py-10 text-right font-arabic text-xl sm:text-3xl md:text-4xl font-normal leading-[2.3] sm:leading-[2.5] select-all ${themeConfig.arabicColorClass}`}
             dir="rtl"
           >
             {message.arabicText}
           </div>
 
           {/* Indonesian Translation */}
-          <div className="py-4 border-t border-zinc-200/60">
-            <p className="text-xs uppercase tracking-wider font-semibold opacity-60 mb-1.5">
+          <div className="py-3 sm:py-4 border-t border-zinc-200/60">
+            <p className="text-[10px] sm:text-xs uppercase tracking-wider font-semibold opacity-60 mb-1">
               Terjemahan (Kemenag RI)
             </p>
-            <p className={`text-sm sm:text-base md:text-lg font-serif-elegant italic leading-relaxed ${themeConfig.translationColorClass}`}>
+            <p className={`text-xs sm:text-base md:text-lg font-serif-elegant italic leading-relaxed ${themeConfig.translationColorClass}`}>
               &quot;{message.translation}&quot;
             </p>
           </div>
 
           {/* Personal Heartfelt Note */}
           {message.personalNote && (
-            <div className={`mt-6 p-5 sm:p-6 rounded-2xl border transition-all ${themeConfig.personalMsgBgClass}`}>
-              <div className="flex items-center justify-between text-xs font-semibold opacity-70 mb-2">
-                <span className="flex items-center gap-1.5">
-                  <Heart className="w-3.5 h-3.5 fill-current" />
+            <div className={`mt-4 sm:mt-6 p-4 sm:p-5 rounded-xl border transition-all ${themeConfig.personalMsgBgClass}`}>
+              <div className="flex items-center justify-between text-[11px] sm:text-xs font-semibold opacity-70 mb-1.5 gap-2">
+                <span className="flex items-center gap-1.5 shrink-0">
+                  <Heart className="w-3 h-3 fill-current" />
                   <span>Pesan Personal:</span>
                 </span>
-                <span>{message.senderName ? `Dari: ${message.senderName}` : 'Dari seseorang yang mendoakanmu'}</span>
+                <span className="truncate">{message.senderName ? `Dari: ${message.senderName}` : 'Dari seseorang yang mendoakanmu'}</span>
               </div>
-              <p className="text-sm sm:text-base font-serif-elegant italic leading-relaxed">
+              <p className="text-xs sm:text-base font-serif-elegant italic leading-relaxed">
                 &quot;{message.personalNote}&quot;
               </p>
             </div>
           )}
 
           {/* Bottom Card Branding & Reference */}
-          <div className="mt-6 pt-4 border-t border-zinc-200/50 flex items-center justify-between text-[11px] opacity-60">
+          <div className="mt-4 pt-3 border-t border-zinc-200/50 flex items-center justify-between text-[10px] opacity-60">
             <span>KirimAyat.xyz</span>
             <span>Surah ke-{message.surahNumber} • Al-Qur’an Al-Karim</span>
           </div>
         </div>
 
         {/* Peaceful Reactions Bar */}
-        <div className="mt-6 pt-5 border-t border-black/10 flex flex-wrap items-center justify-between gap-3">
-          <span className="text-xs font-medium opacity-70">
+        <div className="mt-5 pt-4 border-t border-black/10 flex flex-col sm:flex-row items-center justify-between gap-2.5">
+          <span className="text-[11px] sm:text-xs font-medium opacity-70">
             Tanggapan doa & ketenangan:
           </span>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-center gap-1.5 sm:gap-2 w-full sm:w-auto">
             <button
               id="reaction-btn-aamiin"
               type="button"
               onClick={() => handleReaction('aamiin')}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 ${
+              className={`flex-1 sm:flex-none px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-medium transition-all flex items-center justify-center gap-1 active:scale-95 ${
                 myReactions.aamiin
                   ? 'bg-emerald-800 text-white shadow-xs'
                   : 'bg-white/80 hover:bg-white text-zinc-800 border border-black/10'
@@ -260,7 +260,7 @@ export default function SharedCardView({
               id="reaction-btn-heart"
               type="button"
               onClick={() => handleReaction('heart')}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 ${
+              className={`flex-1 sm:flex-none px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-medium transition-all flex items-center justify-center gap-1 active:scale-95 ${
                 myReactions.heart
                   ? 'bg-rose-700 text-white shadow-xs'
                   : 'bg-white/80 hover:bg-white text-zinc-800 border border-black/10'
@@ -274,23 +274,22 @@ export default function SharedCardView({
               id="reaction-btn-peace"
               type="button"
               onClick={() => handleReaction('peace')}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 ${
+              className={`flex-1 sm:flex-none px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-medium transition-all flex items-center justify-center gap-1 active:scale-95 ${
                 myReactions.peace
                   ? 'bg-amber-700 text-white shadow-xs'
                   : 'bg-white/80 hover:bg-white text-zinc-800 border border-black/10'
               }`}
             >
-              <span>✨ Menenangkan</span>
+              <span>✨ Tenang</span>
               {reactions.peace > 0 && <span className="text-[10px] font-mono">({reactions.peace})</span>}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Share Actions Grid */}
-      <div className="mt-8 space-y-4">
-        {/* Share Buttons Row */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-white border border-zinc-200 shadow-xs space-y-3">
+      {/* Share Actions Grid (2-column on mobile) */}
+      <div className="mt-6 space-y-3 sm:space-y-4">
+        <div className="p-3.5 sm:p-5 rounded-2xl bg-white border border-zinc-200 shadow-2xs space-y-2.5 sm:space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-zinc-700 uppercase tracking-wider flex items-center gap-1.5">
               <Share2 className="w-3.5 h-3.5 text-emerald-800" />
@@ -298,35 +297,35 @@ export default function SharedCardView({
             </span>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
             <button
               id="btn-action-copy-link"
               type="button"
               onClick={handleCopyLink}
-              className="px-4 py-2.5 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-xs font-medium transition-colors flex items-center gap-2 active:scale-95"
+              className="px-3 sm:px-4 py-2.5 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-xs font-medium transition-colors flex items-center justify-center gap-1.5 active:scale-95"
             >
               {copied ? <Check className="w-3.5 h-3.5 text-emerald-700" /> : <Copy className="w-3.5 h-3.5" />}
-              <span>{copied ? 'Tautan Disalin!' : 'Salin Tautan'}</span>
+              <span className="truncate">{copied ? 'Tersalin!' : 'Salin Tautan'}</span>
             </button>
 
             <button
               id="btn-action-share-wa"
               type="button"
               onClick={handleShareWhatsApp}
-              className="px-4 py-2.5 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-medium transition-colors flex items-center gap-2 active:scale-95 shadow-xs"
+              className="px-3 sm:px-4 py-2.5 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-medium transition-colors flex items-center justify-center gap-1.5 active:scale-95 shadow-2xs"
             >
               <MessageCircle className="w-3.5 h-3.5" />
-              <span>Kirim via WhatsApp</span>
+              <span className="truncate">WhatsApp</span>
             </button>
 
             <button
               id="btn-action-share-twitter"
               type="button"
               onClick={handleShareTwitter}
-              className="px-3.5 py-2.5 rounded-xl bg-zinc-900 hover:bg-black text-white text-xs font-medium transition-colors flex items-center gap-1.5 active:scale-95"
+              className="px-3 sm:px-3.5 py-2.5 rounded-xl bg-zinc-900 hover:bg-black text-white text-xs font-medium transition-colors flex items-center justify-center gap-1.5 active:scale-95"
             >
               <ExternalLink className="w-3.5 h-3.5" />
-              <span>X (Twitter)</span>
+              <span className="truncate">X (Twitter)</span>
             </button>
 
             <button
@@ -334,21 +333,21 @@ export default function SharedCardView({
               type="button"
               disabled={isExportingImage}
               onClick={handleDownloadImage}
-              className="px-4 py-2.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-medium transition-colors flex items-center gap-2 active:scale-95"
+              className="px-3 sm:px-4 py-2.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-medium transition-colors flex items-center justify-center gap-1.5 active:scale-95"
             >
               <Download className="w-3.5 h-3.5 text-amber-800" />
-              <span>{isExportingImage ? 'Menyiapkan Gambar...' : 'Unduh Gambar Kartu'}</span>
+              <span className="truncate">{isExportingImage ? 'Proses...' : 'Unduh Gambar'}</span>
             </button>
           </div>
         </div>
 
         {/* CTA: Make a new one */}
-        <div className="text-center pt-4">
+        <div className="text-center pt-2 sm:pt-4">
           <button
             id="btn-create-another-message"
             type="button"
             onClick={onNewMessage}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-emerald-900 hover:bg-emerald-950 text-white text-xs sm:text-sm font-medium transition-all shadow-sm hover:shadow-md active:scale-95"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-emerald-900 hover:bg-emerald-950 text-white text-xs sm:text-sm font-medium transition-all shadow-sm hover:shadow-md active:scale-95"
           >
             <Send className="w-3.5 h-3.5" />
             <span>Kirim Ayat Versimu Sendiri</span>

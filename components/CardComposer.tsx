@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowLeft, Sparkles, Send, Check, Heart, Edit3, Palette, User, MessageSquare, Loader2, BookOpen, RefreshCw } from 'lucide-react';
+import { ArrowLeft, Sparkles, Send, Check, Heart, Edit3, Palette, User, MessageSquare, Loader2, BookOpen, RefreshCw, Eye } from 'lucide-react';
 import { CardThemeId, PersonalMessage } from '@/lib/types';
 import { CARD_THEMES } from '@/lib/themes';
 import AudioPlayer from './AudioPlayer';
@@ -38,15 +38,16 @@ export default function CardComposer({
   const [senderName, setSenderName] = useState('');
   const [personalNote, setPersonalNote] = useState(verse.defaultNote || '');
   const [selectedTheme, setSelectedTheme] = useState<CardThemeId>('emerald-sand');
+  const [mobileTab, setMobileTab] = useState<'form' | 'preview'>('form');
 
   const themeConfig = CARD_THEMES[selectedTheme];
 
   const quickMessageSuggestions = [
-    'Buat kamu yang lagi berjuang, ingat ya: ada kemudahan di setiap kesulitan.',
-    'Semoga ayat ini bisa menemani harimu dan membawa ketenangan di dalam dada.',
-    'Ketika dunia terasa begitu bising, semoga firman-Nya memeluk hatimu dengan damai.',
-    'Terima kasih sudah hadir dan menjadi kebaikan. Saling mendoakan selalu ya.',
-    'Jangan pernah merasa sendiri, Allah selalu dekat dan mendengar setiap bisik doamu.',
+    'semangat yaa, lu udah berjuang keras bgt. peluk jauh bwt lu!',
+    'jgn overthinking mulu woy wkwk, istirahat dlu.',
+    'makasih yaa udah hadir & selalu jd penenang hariku.',
+    'semoga ayat ini nemenin malam lu yg lg sepi.',
+    'lu ga sendirian kok, Allah gapernah ninggalin lu.',
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -60,32 +61,65 @@ export default function CardComposer({
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4 sm:py-8 md:py-10">
       {/* Top Navigation */}
       <button
         id="btn-composer-back-to-picker"
         type="button"
         onClick={onBackToPicker}
-        className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-900 mb-4 transition-colors"
+        className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-900 mb-3 sm:mb-4 transition-colors active:scale-95"
       >
         <ArrowLeft className="w-3.5 h-3.5" />
         <span>Ganti Ayat Pilihan</span>
       </button>
 
-      <div className="mb-6">
-        <h2 className="text-2xl sm:text-3xl font-semibold text-zinc-900 font-serif-elegant">
+      <div className="mb-4 sm:mb-6">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-zinc-900 font-serif-elegant">
           Tulis Pesan & Kirim Ayat
         </h2>
-        <p className="text-xs sm:text-sm text-zinc-600 mt-1">
+        <p className="text-xs sm:text-sm text-zinc-600 mt-0.5">
           Sematkan pesan personalmu bersama ayat Al-Qur&apos;an penyejuk jiwa.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      {/* Mobile Tab Switcher (Visible only on mobile) */}
+      <div className="lg:hidden flex p-1 rounded-xl bg-zinc-200/80 mb-5 text-xs font-semibold">
+        <button
+          type="button"
+          onClick={() => setMobileTab('form')}
+          className={`flex-1 py-2 rounded-lg transition-all flex items-center justify-center gap-1.5 ${
+            mobileTab === 'form'
+              ? 'bg-white text-zinc-900 shadow-2xs'
+              : 'text-zinc-600 hover:text-zinc-900'
+          }`}
+        >
+          <Edit3 className="w-3.5 h-3.5" />
+          <span>Formulir Pesan</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => setMobileTab('preview')}
+          className={`flex-1 py-2 rounded-lg transition-all flex items-center justify-center gap-1.5 ${
+            mobileTab === 'preview'
+              ? 'bg-white text-emerald-950 shadow-2xs'
+              : 'text-zinc-600 hover:text-zinc-900'
+          }`}
+        >
+          <Eye className="w-3.5 h-3.5 text-emerald-800" />
+          <span>Lihat Pratinjau Surat</span>
+        </button>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
         {/* Left Column: Form & Inputs */}
-        <form onSubmit={handleSubmit} className="lg:col-span-6 space-y-5">
+        <form
+          onSubmit={handleSubmit}
+          className={`lg:col-span-6 space-y-4 sm:space-y-5 ${
+            mobileTab === 'preview' ? 'hidden lg:block' : 'block'
+          }`}
+        >
           {/* Recipient Name */}
-          <div className="bg-white p-5 rounded-2xl border border-zinc-200 shadow-xs space-y-2.5">
+          <div className="bg-white p-4 sm:p-5 rounded-2xl border border-zinc-200 shadow-xs space-y-2">
             <label className="text-xs font-semibold text-zinc-700 uppercase tracking-wider flex items-center justify-between">
               <span className="flex items-center gap-1.5">
                 <User className="w-3.5 h-3.5 text-emerald-800" />
@@ -99,9 +133,9 @@ export default function CardComposer({
               required
               value={recipientName}
               onChange={(e) => setRecipientName(e.target.value)}
-              placeholder="Contoh: Dinda, Ibu, Fajar, Zahra, Diriku Sendiri..."
+              placeholder="Contoh: Dinda, Mama, Fajar, Zahra, diri sendiri..."
               maxLength={60}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-800/20 focus:border-emerald-800 placeholder:text-zinc-400 font-medium"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-800/20 focus:border-emerald-800 placeholder:text-zinc-400 font-medium"
             />
             <p className="text-[11px] text-zinc-400">
               Nama ini akan tampil di bagian atas kartu dan dapat dicari di halaman utama.
@@ -109,40 +143,41 @@ export default function CardComposer({
           </div>
 
           {/* Attached Ayat Widget / Selector */}
-          <div className="bg-white p-5 rounded-2xl border border-zinc-200 shadow-xs space-y-3">
-            <div className="flex items-center justify-between">
-              <label className="text-xs font-semibold text-zinc-700 uppercase tracking-wider flex items-center gap-1.5">
-                <BookOpen className="w-3.5 h-3.5 text-emerald-800" />
-                <span>Ayat yang Disematkan:</span>
+          <div className="bg-white p-4 sm:p-5 rounded-2xl border border-zinc-200 shadow-xs space-y-2.5">
+            <div className="flex items-center justify-between gap-2">
+              <label className="text-xs font-semibold text-zinc-700 uppercase tracking-wider flex items-center gap-1.5 truncate">
+                <BookOpen className="w-3.5 h-3.5 text-emerald-800 shrink-0" />
+                <span className="truncate">Ayat yang Disematkan:</span>
               </label>
               <button
                 id="btn-change-attached-verse"
                 type="button"
                 onClick={onBackToPicker}
-                className="text-[11px] text-emerald-800 hover:text-emerald-950 font-semibold flex items-center gap-1 underline"
+                className="text-[11px] text-emerald-800 hover:text-emerald-950 font-semibold flex items-center gap-1 underline shrink-0 active:scale-95"
               >
                 <RefreshCw className="w-3 h-3" />
                 <span>Ganti Ayat</span>
               </button>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-[#FAF9F5] border border-zinc-200/80 space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-emerald-950 px-2.5 py-0.5 rounded-md bg-emerald-100 border border-emerald-200">
+            <div className="p-3 sm:p-3.5 rounded-xl bg-[#FAF9F5] border border-zinc-200/80 space-y-2">
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-xs font-semibold text-emerald-950 px-2.5 py-0.5 rounded-md bg-emerald-100 border border-emerald-200 shrink-0">
                   QS. {verse.surahName} : {verse.verseNumber}
                 </span>
                 {verse.audioUrl && (
-                  <div className="scale-90 origin-right">
+                  <div className="shrink-0">
                     <AudioPlayer
                       audioUrl={verse.audioUrl}
                       surahName={verse.surahName}
                       verseNumber={verse.verseNumber}
+                      variant="compact"
                     />
                   </div>
                 )}
               </div>
 
-              <div className="text-right font-arabic text-lg text-emerald-950 font-normal leading-relaxed line-clamp-2" dir="rtl">
+              <div className="text-right font-arabic text-lg sm:text-xl text-emerald-950 font-normal leading-relaxed line-clamp-2" dir="rtl">
                 {verse.arabicText}
               </div>
 
@@ -153,7 +188,7 @@ export default function CardComposer({
           </div>
 
           {/* Personal Message */}
-          <div className="bg-white p-5 rounded-2xl border border-zinc-200 shadow-xs space-y-3">
+          <div className="bg-white p-4 sm:p-5 rounded-2xl border border-zinc-200 shadow-xs space-y-2.5">
             <div className="flex items-center justify-between">
               <label className="text-xs font-semibold text-zinc-700 uppercase tracking-wider flex items-center gap-1.5">
                 <MessageSquare className="w-3.5 h-3.5 text-emerald-800" />
@@ -171,7 +206,7 @@ export default function CardComposer({
               onChange={(e) => setPersonalNote(e.target.value)}
               placeholder="Tuliskan ungkapan perasaan, doa, atau alasan kenapa kamu memilih ayat ini untuknya..."
               maxLength={300}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-800/20 focus:border-emerald-800 placeholder:text-zinc-400 resize-none font-serif-elegant leading-relaxed"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-800/20 focus:border-emerald-800 placeholder:text-zinc-400 resize-none font-serif-elegant leading-relaxed"
             />
 
             {/* Quick Inspiration Pills */}
@@ -179,13 +214,13 @@ export default function CardComposer({
               <span className="text-[11px] text-zinc-500 font-medium block mb-1.5">
                 Inspirasi kalimat cepat:
               </span>
-              <div className="flex flex-col gap-1.5">
+              <div className="flex flex-col gap-1">
                 {quickMessageSuggestions.map((suggestion, idx) => (
                   <button
                     key={idx}
                     type="button"
                     onClick={() => setPersonalNote(suggestion)}
-                    className="text-left text-[11px] px-2.5 py-1.5 rounded-lg bg-[#FAF9F5] hover:bg-emerald-50 hover:text-emerald-900 text-zinc-600 border border-zinc-200/80 transition-colors line-clamp-1 italic"
+                    className="text-left text-[11px] px-2.5 py-1.5 rounded-lg bg-[#FAF9F5] hover:bg-emerald-50 hover:text-emerald-900 text-zinc-600 border border-zinc-200/80 transition-colors line-clamp-1 italic active:scale-[0.99]"
                   >
                     &quot;{suggestion}&quot;
                   </button>
@@ -195,7 +230,7 @@ export default function CardComposer({
           </div>
 
           {/* Sender Name */}
-          <div className="bg-white p-5 rounded-2xl border border-zinc-200 shadow-xs space-y-2.5">
+          <div className="bg-white p-4 sm:p-5 rounded-2xl border border-zinc-200 shadow-xs space-y-2">
             <label className="text-xs font-semibold text-zinc-700 uppercase tracking-wider flex items-center gap-1.5">
               <User className="w-3.5 h-3.5 text-emerald-800" />
               <span>Pengirim Pesan (From: - Opsional)</span>
@@ -205,17 +240,17 @@ export default function CardComposer({
               type="text"
               value={senderName}
               onChange={(e) => setSenderName(e.target.value)}
-              placeholder="Contoh: Fajar, Sahabatmu, atau Anonim"
+              placeholder="Contoh: anon, sohib lu, atau nama panggilan"
               maxLength={50}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-800/20 focus:border-emerald-800 placeholder:text-zinc-400"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-800/20 focus:border-emerald-800 placeholder:text-zinc-400"
             />
             <p className="text-[11px] text-zinc-400">
-              Jika dikosongkan, akan tampil sebagai &quot;Seseorang yang mendoakanmu&quot;.
+              Bisa anonim (seperti &quot;Seseorang yang mendoakanmu&quot;).
             </p>
           </div>
 
           {/* Theme Selector */}
-          <div className="bg-white p-5 rounded-2xl border border-zinc-200 shadow-xs space-y-3">
+          <div className="bg-white p-4 sm:p-5 rounded-2xl border border-zinc-200 shadow-xs space-y-2.5">
             <label className="text-xs font-semibold text-zinc-700 uppercase tracking-wider flex items-center gap-1.5">
               <Palette className="w-3.5 h-3.5 text-emerald-800" />
               <span>Pilihan Nuansa Kartu</span>
@@ -227,17 +262,17 @@ export default function CardComposer({
                   id={`theme-btn-${thm.id}`}
                   type="button"
                   onClick={() => setSelectedTheme(thm.id)}
-                  className={`p-2.5 rounded-xl border text-left flex items-center gap-2.5 transition-all ${
+                  className={`p-2.5 rounded-xl border text-left flex items-center gap-2 transition-all active:scale-95 ${
                     selectedTheme === thm.id
                       ? 'border-emerald-800 ring-2 ring-emerald-800/20 bg-emerald-50/50'
                       : 'border-zinc-200 hover:border-zinc-300 bg-white'
                   }`}
                 >
                   <span
-                    className="w-4 h-4 rounded-full border border-black/10 shrink-0"
+                    className="w-3.5 h-3.5 rounded-full border border-black/10 shrink-0"
                     style={{ backgroundColor: thm.previewColor }}
                   />
-                  <span className="text-xs font-medium text-zinc-800 truncate">{thm.name}</span>
+                  <span className="text-[11px] sm:text-xs font-medium text-zinc-800 truncate">{thm.name}</span>
                 </button>
               ))}
             </div>
@@ -248,7 +283,7 @@ export default function CardComposer({
             id="btn-create-share-link"
             type="submit"
             disabled={isGenerating}
-            className="w-full py-3.5 rounded-full bg-emerald-900 hover:bg-emerald-950 text-white font-medium text-sm transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 active:scale-[0.99] disabled:opacity-70"
+            className="w-full py-3.5 rounded-full bg-emerald-900 hover:bg-emerald-950 text-white font-medium text-sm transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 active:scale-[0.98] disabled:opacity-70"
           >
             {isGenerating ? (
               <>
@@ -265,7 +300,11 @@ export default function CardComposer({
         </form>
 
         {/* Right Column: Live Synchronized Card Preview */}
-        <div className="lg:col-span-6 sticky top-24">
+        <div
+          className={`lg:col-span-6 lg:sticky lg:top-24 ${
+            mobileTab === 'form' ? 'hidden lg:block' : 'block'
+          }`}
+        >
           <div className="flex items-center justify-between mb-2 px-1">
             <span className="text-xs font-semibold text-zinc-500 uppercase tracking-wider flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-emerald-800" />
@@ -276,29 +315,29 @@ export default function CardComposer({
 
           {/* Rendered Live Theme Card */}
           <div
-            className={`p-6 sm:p-8 rounded-3xl border transition-all duration-300 relative ${themeConfig.bgClass} ${themeConfig.borderClass}`}
+            className={`p-4 sm:p-6 md:p-8 rounded-3xl border transition-all duration-300 relative ${themeConfig.bgClass} ${themeConfig.borderClass}`}
           >
             <div
-              className={`p-6 sm:p-7 rounded-2xl border backdrop-blur-xs transition-all ${themeConfig.cardBgClass}`}
+              className={`p-4 sm:p-6 rounded-2xl border backdrop-blur-xs transition-all ${themeConfig.cardBgClass}`}
             >
               {/* Recipient Header */}
-              <div className="pb-4 mb-4 border-b border-zinc-200/50 flex items-center justify-between">
-                <div>
-                  <span className="text-[10px] uppercase font-bold tracking-wider opacity-60 block">
+              <div className="pb-3.5 mb-3.5 border-b border-zinc-200/50 flex items-center justify-between gap-2">
+                <div className="truncate">
+                  <span className="text-[9px] sm:text-[10px] uppercase font-bold tracking-wider opacity-60 block">
                     Pesan Khusus Untuk:
                   </span>
-                  <h4 className="text-base sm:text-lg font-semibold text-zinc-900 font-serif-elegant">
+                  <h4 className="text-base sm:text-lg font-semibold text-zinc-900 font-serif-elegant truncate">
                     {recipientName || 'Untuk Kamu'}
                   </h4>
                 </div>
-                <span className={`text-[11px] px-2.5 py-1 rounded-full font-semibold ${themeConfig.accentBadgeClass}`}>
+                <span className={`text-[10px] sm:text-[11px] px-2.5 py-0.5 sm:py-1 rounded-full font-semibold shrink-0 ${themeConfig.accentBadgeClass}`}>
                   QS. {verse.surahName} : {verse.verseNumber}
                 </span>
               </div>
 
               {/* Audio if available */}
               {verse.audioUrl && (
-                <div className="mb-4">
+                <div className="mb-3.5">
                   <AudioPlayer
                     audioUrl={verse.audioUrl}
                     surahName={verse.surahName}
@@ -309,15 +348,15 @@ export default function CardComposer({
 
               {/* Arabic Verse */}
               <div
-                className={`py-4 text-right font-arabic text-2xl sm:text-3xl font-normal leading-[2.4] select-all ${themeConfig.arabicColorClass}`}
+                className={`py-3 sm:py-4 text-right font-arabic text-xl sm:text-2xl md:text-3xl font-normal leading-[2.3] select-all ${themeConfig.arabicColorClass}`}
                 dir="rtl"
               >
                 {verse.arabicText}
               </div>
 
               {/* Indonesian Translation */}
-              <div className="py-3 border-t border-zinc-200/50">
-                <p className="text-[11px] uppercase tracking-wider opacity-60 font-semibold mb-1">
+              <div className="py-2.5 border-t border-zinc-200/50">
+                <p className="text-[10px] uppercase tracking-wider opacity-60 font-semibold mb-1">
                   Terjemahan
                 </p>
                 <p className={`text-xs sm:text-sm font-serif-elegant italic leading-relaxed ${themeConfig.translationColorClass}`}>
@@ -327,11 +366,11 @@ export default function CardComposer({
 
               {/* Personal Letter Note */}
               <div
-                className={`mt-4 p-4 rounded-xl border transition-all ${themeConfig.personalMsgBgClass}`}
+                className={`mt-3.5 p-3.5 sm:p-4 rounded-xl border transition-all ${themeConfig.personalMsgBgClass}`}
               >
-                <div className="text-[10px] uppercase tracking-wider font-semibold opacity-60 mb-1 flex items-center justify-between">
+                <div className="text-[10px] uppercase tracking-wider font-semibold opacity-60 mb-1 flex items-center justify-between gap-2">
                   <span>Catatan Pengirim:</span>
-                  <span>{senderName ? `Dari: ${senderName}` : 'Dari seseorang yang mendoakanmu'}</span>
+                  <span className="truncate">{senderName ? `Dari: ${senderName}` : 'Dari seseorang yang mendoakanmu'}</span>
                 </div>
                 <p className="text-xs sm:text-sm font-serif-elegant italic leading-relaxed">
                   &quot;{personalNote || 'Semoga ayat ini menemanimu dengan penuh ketenteraman...'}&quot;
@@ -339,12 +378,24 @@ export default function CardComposer({
               </div>
 
               {/* Footer Stamp */}
-              <div className="mt-4 pt-3 border-t border-zinc-200/40 flex items-center justify-between text-[10px] opacity-60">
+              <div className="mt-3.5 pt-2.5 border-t border-zinc-200/40 flex items-center justify-between text-[10px] opacity-60">
                 <span>KirimAyat.xyz</span>
                 <span>Pesan ayat personal</span>
               </div>
             </div>
           </div>
+
+          {/* Mobile Tab back to form button */}
+          {mobileTab === 'preview' && (
+            <button
+              type="button"
+              onClick={() => setMobileTab('form')}
+              className="lg:hidden w-full mt-4 py-3 rounded-full bg-emerald-900 text-white text-xs font-semibold flex items-center justify-center gap-2 active:scale-95"
+            >
+              <Edit3 className="w-3.5 h-3.5" />
+              <span>Kembali Edit Pesan</span>
+            </button>
+          )}
         </div>
       </div>
     </div>
