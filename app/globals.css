@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@layer base {
+  @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cinzel:wght@500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Scheherazade+New:wght@400;600;700&display=swap');
+
+  :root {
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-serif: 'Newsreader', Georgia, serif;
+    --font-arabic: 'Amiri', 'Scheherazade New', 'Traditional Arabic', serif;
+    --font-display: 'Cinzel', serif;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #FAFAF7;
+    color: #27272A;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+.font-arabic {
+  font-family: 'Amiri', 'Scheherazade New', serif;
+  line-height: 2.2;
+}
+
+.font-serif-elegant {
+  font-family: 'Newsreader', Georgia, serif;
+}
+
+.font-display {
+  font-family: 'Cinzel', serif;
+}
+
+/* Custom scrollbar for serene feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D4D4D8;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A1A1AA;
+}
+
+/* Subtle background pattern */
+.bg-subtle-islamic {
+  background-color: #FAF9F5;
+  background-image: radial-gradient(#E2DFD2 0.75px, transparent 0.75px), radial-gradient(#E2DFD2 0.75px, #FAF9F5 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
+
+/* Smooth shimmer animations */
+@keyframes subtle-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-float-slow {
+  animation: subtle-float 6s ease-in-out infinite;
+}
