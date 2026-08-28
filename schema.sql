@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS messages (
+  id TEXT PRIMARY KEY,
+  recipient_name TEXT NOT NULL,
+  sender_name TEXT,
+  personal_note TEXT NOT NULL,
+  surah_number INTEGER NOT NULL,
+  surah_name TEXT NOT NULL,
+  surah_arabic TEXT,
+  surah_translation TEXT,
+  verse_number TEXT NOT NULL,
+  arabic_text TEXT NOT NULL,
+  translation TEXT NOT NULL,
+  theme TEXT NOT NULL,
+  audio_url TEXT,
+  views INTEGER DEFAULT 1,
+  reactions_aamiin INTEGER DEFAULT 0,
+  reactions_heart INTEGER DEFAULT 0,
+  reactions_peace INTEGER DEFAULT 0,
+  created_at INTEGER NOT NULL
+);

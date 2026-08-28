@@ -1,6 +1,18 @@
 import { SURAH_LIST } from './quran-data';
 import { AyatItem, SurahMeta } from './types';
 
+export function getAyatAudioUrl(surahNumber: number, verseNumber: number | string = 1): string {
+  const s = String(surahNumber).padStart(3, '0');
+  const vNum = typeof verseNumber === 'number' ? verseNumber : (parseInt(String(verseNumber), 10) || 1);
+  const v = String(vNum).padStart(3, '0');
+  return `https://everyayah.com/data/Alafasy_128kbps/${s}${v}.mp3`;
+}
+
+export function getSurahAudioUrl(surahNumber: number): string {
+  const s = String(surahNumber).padStart(3, '0');
+  return `https://download.quranicaudio.com/quran/mishaari_raashid_al_3afaasee/${s}.mp3`;
+}
+
 export async function getSurahList(): Promise<SurahMeta[]> {
   return SURAH_LIST;
 }
@@ -17,7 +29,6 @@ export interface SurahFullDetail {
   ayat: AyatItem[];
 }
 
-// In-memory cache for surah verses during session
 const surahCache = new Map<number, SurahFullDetail>();
 
 export async function getSurahDetail(surahNumber: number): Promise<SurahFullDetail> {
@@ -26,12 +37,8 @@ export async function getSurahDetail(surahNumber: number): Promise<SurahFullDeta
   }
 
   try {
-    // Primary trusted source: EQuran API v2 (official Kemenag dataset mirror)
     const res = await fetch(`https://equran.id/api/v2/surat/${surahNumber}`, {
-      next: { revalidate: 86400 },
-      headers: {
-        'Accept': 'application/json',
-      }
+      headers: { 'Accept': 'application/json' }
     });
 
     if (res.ok) {
@@ -45,13 +52,17 @@ export async function getSurahDetail(surahNumber: number): Promise<SurahFullDeta
           tempatTurun: data.data.tempatTurun === 'Mekah' ? 'Mekah' : 'Madinah',
           arti: data.data.arti,
           deskripsi: data.data.deskripsi || '',
-          audioFull: data.data.audioFull,
+          audioFull: {
+            '05': getSurahAudioUrl(data.data.nomor),
+          },
           ayat: (data.data.ayat || []).map((item: any) => ({
             nomorAyat: item.nomorAyat,
             teksArab: item.teksArab,
             teksLatin: item.teksLatin,
             teksIndonesia: item.teksIndonesia,
-            audio: item.audio,
+            audio: {
+              '05': getAyatAudioUrl(data.data.nomor, item.nomorAyat),
+            },
           })),
         };
         surahCache.set(surahNumber, detail);
@@ -59,38 +70,9 @@ export async function getSurahDetail(surahNumber: number): Promise<SurahFullDeta
       }
     }
   } catch (err) {
-    console.warn(`Primary Quran API fetch failed for surah ${surahNumber}, trying secondary...`, err);
+    console.warn(`Primary Quran API fetch failed for surah ${surahNumber}:`, err);
   }
 
-  // Secondary fallback: Quran Kemenag Open API
-  try {
-    const res = await fetch(`https://open-api.my.id/api/quran/surah/${surahNumber}`);
-    if (res.ok) {
-      const data = await res.json();
-      const meta = SURAH_LIST.find(s => s.nomor === surahNumber) || SURAH_LIST[0];
-      const detail: SurahFullDetail = {
-        nomor: meta.nomor,
-        nama: meta.nama,
-        namaLatin: meta.namaLatin,
-        jumlahAyat: meta.jumlahAyat,
-        tempatTurun: meta.tempatTurun,
-        arti: meta.arti,
-        deskripsi: meta.deskripsi,
-        ayat: (data.ayat || []).map((item: any) => ({
-          nomorAyat: item.nomor || item.nomorAyat,
-          teksArab: item.ar || item.teksArab,
-          teksLatin: item.tr || item.teksLatin,
-          teksIndonesia: item.idn || item.teksIndonesia,
-        })),
-      };
-      surahCache.set(surahNumber, detail);
-      return detail;
-    }
-  } catch (err) {
-    console.error(`Secondary Quran API failed for surah ${surahNumber}:`, err);
-  }
-
-  // Fallback metadata if network is unavailable
   const meta = SURAH_LIST.find(s => s.nomor === surahNumber) || SURAH_LIST[0];
   return {
     nomor: meta.nomor,
@@ -100,11 +82,13 @@ export async function getSurahDetail(surahNumber: number): Promise<SurahFullDeta
     tempatTurun: meta.tempatTurun,
     arti: meta.arti,
     deskripsi: meta.deskripsi,
+    audioFull: { '05': getSurahAudioUrl(meta.nomor) },
     ayat: [
       {
         nomorAyat: 1,
         teksArab: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
         teksIndonesia: 'Dengan nama Allah Yang Maha Pengasih, Maha Penyayang.',
+        audio: { '05': getAyatAudioUrl(meta.nomor, 1) },
       }
     ]
   };

@@ -132,11 +132,11 @@ export const CURATED_VERSES: CuratedVerse[] = [
     themeLabel: 'Untuk yang Sedang Berjuang',
     contextNote: 'Pengingat lembut bahwa Allah tidak menempatkan kemudahan setelah kesulitan, tetapi mendampingkannya bersamaan.',
     suggestedMessages: [
-      'Buat kamu yang lagi capek dan berjuang, ingat ya: kemudahan itu sudah disiapkan bersamaan dengan kesulitan ini.',
-      'Tetap kuat ya. Peluk hangat dari jauh, janji Allah itu pasti.',
-      'Semoga hari-harimu diringankan. Jangan lupa istirahat, kamu sudah hebat.'
+      'din, santai aja jgn overthinking bgt ya. inget bgt janji Allah kemudahan psti dtg barengan sm kesulitan.',
+      'semangat yaa, lu udah berjuang keras bgt. peluk jauh bwt lu!',
+      'capek blh tp jgn nyerah yaa, istirahat dlu bntr.'
     ],
-    audioUrl: 'https://equran.nos.wjv-1.neo.id/audio-full/Misyari-Rasyid-Al-Afasi/094.mp3'
+    audioUrl: 'https://everyayah.com/data/Alafasy_128kbps/094005.mp3'
   },
   {
     id: 'curated-duha-3-5',
@@ -150,11 +150,11 @@ export const CURATED_VERSES: CuratedVerse[] = [
     themeLabel: 'Saat Merasa Sendiri',
     contextNote: 'Ayat terindah penyejuk hati saat merasa ditinggalkan atau sedih, Allah menjanjikan masa depan yang membahagiakan.',
     suggestedMessages: [
-      'Ketika kamu merasa sendiri, ingatlah Allah selalu bersamamu dan tidak pernah meninggalkanmu.',
-      'Kelak Allah akan beri hadiah yang bikin kamu tersenyum lega. Sabar sebentar lagi ya.',
-      'Untukmu yang kurindukan, semoga ayat ini memeluk hatimu hari ini.'
+      'lu ga sendirian kok, Allah gapernah ninggalin lu sndiri.',
+      'sabar bntr lg yaa, nnti Allah bakal kasih ganti yg bkin lu senyum puas bgt.',
+      'semoga ayat ini nemenin malam lu yg lg sepi.'
     ],
-    audioUrl: 'https://equran.nos.wjv-1.neo.id/audio-full/Misyari-Rasyid-Al-Afasi/093.mp3'
+    audioUrl: 'https://everyayah.com/data/Alafasy_128kbps/093003.mp3'
   },
   {
     id: 'curated-rad-28',
@@ -168,11 +168,11 @@ export const CURATED_VERSES: CuratedVerse[] = [
     themeLabel: 'Penenang Hati yang Gelisah',
     contextNote: 'Obat terbaik bagi jiwa yang overthinking, cemas, atau lelah dengan hiruk pikuk dunia.',
     suggestedMessages: [
-      'Tarik napas perlahan... Istirahatkan pikiranmu. Semoga hatimu selalu diliputi ketenangan.',
-      'Saat dunia terasa bising, kembalilah mengingat-Nya. Hatimu berharga.',
-      'Semoga hari ini dan seterusnya hatimu selalu damai.'
+      'tarik napas dlu woy jgn panik mulu wkwk, istirahat dlu otak lu.',
+      'kalo dunia lg berisik bgt, inget Allah aja biar adem.',
+      'tenang ya, smua bkl baik2 aja kok insyaAllah.'
     ],
-    audioUrl: 'https://equran.nos.wjv-1.neo.id/audio-full/Misyari-Rasyid-Al-Afasi/013.mp3'
+    audioUrl: 'https://everyayah.com/data/Alafasy_128kbps/013028.mp3'
   },
   {
     id: 'curated-baqarah-286',
@@ -186,10 +186,11 @@ export const CURATED_VERSES: CuratedVerse[] = [
     themeLabel: 'Kuatkan Langkahmu',
     contextNote: 'Penegasan bahwa kamu dipilih menghadapi ujian ini karena Allah tahu kamu sanggup melaluinya.',
     suggestedMessages: [
-      'Kamu sedang diuji karena kamu kuat. Allah tidak akan membebanimu di luar batas kemampuanmu.',
-      'Percaya pada dirimu, Allah yang memilihmu karena Dia tahu kamu mampu.',
-      'Satu langkah kecil hari ini sudah sangat berharga. Semangat terus ya!'
-    ]
+      'lu diuji krna Allah tau lu kuat bgt bro, jgn insecure trs.',
+      'yakin sm diri lu, lu bsa ngelewatin ini kok!',
+      'selangkah demi selangkah aja, ga usah buru2.'
+    ],
+    audioUrl: 'https://everyayah.com/data/Alafasy_128kbps/002286.mp3'
   },
   {
     id: 'curated-talaq-2-3',
@@ -203,95 +204,11 @@ export const CURATED_VERSES: CuratedVerse[] = [
     themeLabel: 'Pintu Rezeki & Jalan Keluar',
     contextNote: 'Janji jalan keluar dan rezeki yang melimpah dari pintu-pintu tak terduga bagi yang berserah diri.',
     suggestedMessages: [
-      'Jangan khawatirkan masa depan yang belum tiba. Cukupkan ikhtiarmu, serahkan sisanya pada Allah.',
-      'Pintu rezeki dan solusi tak terduga sedang menuju ke arahmu. Tetaplah berprasangka baik.',
-      'Untuk sahabatku yang sedang merintis impian, semoga dicukupkan segala urusanmu.'
-    ]
-  },
-  {
-    id: 'curated-ibrahim-7',
-    surahNumber: 14,
-    surahName: 'Ibrahim',
-    surahArabic: 'إبراهيم',
-    verseNumber: 7,
-    arabicText: 'وَإِذْ تَأَذَّنَ رَبُّكُمْ لَئِنْ شَكَرْتُمْ لَأَزِيدَنَّكُمْ ۖ وَلَئِنْ كَفَرْتُمْ إِنَّ عَذَابِي لَشَدِيدٌ',
-    translation: 'Dan (ingatlah) ketika Tuhanmu memaklumkan, "Sesungguhnya jika kamu bersyukur, niscaya Aku akan menambah (nikmat) kepadamu..."',
-    themeCategory: 'syukur',
-    themeLabel: 'Ungkapan Rasa Syukur',
-    contextNote: 'Kunci bertambahnya keberkahan hidup adalah dengan merayakan nikmat-nikmat kecil hari ini.',
-    suggestedMessages: [
-      'Terima kasih sudah hadir di hidupku. Aku bersyukur memiliki sosok sepertimu.',
-      'Semoga hidupmu selalu dilimpahi keberkahan dan kebahagiaan yang bertambah setiap hari.',
-      'Alhamdulillah untuk setiap detik kebersamaan dan kebaikan yang kita lalui.'
-    ]
-  },
-  {
-    id: 'curated-aliimran-139',
-    surahNumber: 3,
-    surahName: "Ali 'Imran",
-    surahArabic: 'آل عمران',
-    verseNumber: 139,
-    arabicText: 'وَلَا تَهِنُوا وَلَا تَحْزَنُوا وَأَنْتُمُ الْأَعْلَوْنَ إِنْ كُنْتُمْ مُؤْمِنِينَ',
-    translation: 'Dan janganlah kamu (merasa) lemah, dan jangan (pula) bersedih hati, sebab kamu paling tinggi (derajatnya), jika kamu orang beriman.',
-    themeCategory: 'ujian',
-    themeLabel: 'Jangan Bersedih & Patah Hati',
-    contextNote: 'Ayat pembangkit semangat dari kesedihan mendalam dan rasa rendah diri.',
-    suggestedMessages: [
-      'Tegakkan kepalamu, jangan biarkan kesedihan hari ini meredupkan cahayamu.',
-      'Kesedihan ini cuma sementara, kamu jauh lebih berharga dan kuat dari yang kamu kira.',
-      'Kirim doa dan semangat terbaik untukmu hari ini.'
-    ]
-  },
-  {
-    id: 'curated-furqan-74',
-    surahNumber: 25,
-    surahName: 'Al-Furqan',
-    surahArabic: 'الفرقان',
-    verseNumber: 74,
-    arabicText: 'وَالَّذِينَ يَقُولُونَ رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا',
-    translation: 'Dan orang-orang yang berkata, "Ya Tuhan kami, anugerahkanlah kepada kami pasangan kami dan keturunan kami sebagai penyenang hati (kami), dan jadikanlah kami pemimpin bagi orang-orang yang bertakwa."',
-    themeCategory: 'cinta',
-    themeLabel: 'Doa Penyejuk Jiwa Pasangan & Keluarga',
-    contextNote: 'Doa agung agar orang yang kita cintai senantiasa menjadi penyejuk mata dan hati (Qurrata A\'yun).',
-    suggestedMessages: [
-      'Semoga kamu selalu menjadi penyejuk hati dan kebaikan untuk sekelilingmu.',
-      'Pesan ini kutulis dengan penuh doa tulus untuk keselamatan dan kebahagiaanmu.',
-      'Terima kasih telah menjadi penenang di setiap langkah hariku.'
-    ]
-  },
-  {
-    id: 'curated-yusuf-86',
-    surahNumber: 12,
-    surahName: 'Yusuf',
-    surahArabic: 'يوسف',
-    verseNumber: 86,
-    arabicText: 'قَالَ إِنَّمَا أَشْكُو بَثِّي وَحُزْنِي إِلَى اللَّهِ وَأَعْلَمُ مِنَ اللَّهِ مَا لَا تَعْلَمُونَ',
-    translation: 'Dia (Yakub) menjawab, "Hanya kepada Allah aku mengadukan kesusahan dan kesedihanku, dan aku mengetahui dari Allah apa yang tidak kamu ketahui."',
-    themeCategory: 'ketenangan',
-    themeLabel: 'Tempat Mengadu Segala Kesedihan',
-    contextNote: 'Curahan hati terindah ketika tak ada manusia yang memahami beban di dadamu.',
-    suggestedMessages: [
-      'Jika tidak ada yang paham rasa lelahmu, ceritakan semuanya pada Allah dalam sujudmu.',
-      'Hatimu aman bersama Allah. Tumpahkan segala air mata di hadapan-Nya.',
-      'Semoga kelegaan segera menyelimuti jiwamu.'
-    ]
-  },
-  {
-    id: 'curated-thaha-46',
-    surahNumber: 20,
-    surahName: 'Thaha',
-    surahArabic: 'طه',
-    verseNumber: 46,
-    arabicText: 'قَالَ لَا تَخَافَا ۖ إِنَّنِي مَعَكُمَا أَسْمَعُ وَأَرَىٰ',
-    translation: 'Dia (Allah) berfirman, "Janganlah kamu berdua khawatir, sesungguhnya Aku bersama kamu berdua, Aku mendengar dan melihat."',
-    themeCategory: 'doa',
-    themeLabel: 'Jangan Takut Menghadapi Esok',
-    contextNote: 'Kata-kata penenang langsung dari Allah kepada Musa dan Harun saat menghadapi ketakutan terbesar.',
-    suggestedMessages: [
-      'Jangan takut ya. Apapun tantangan besok, Allah bersamamu, melihat dan mendengar setiap bisik doamu.',
-      'Semoga ketenangan memenuhi jiwamu malam ini. Kamu tidak sendirian.',
-      'Kuatkan langkah, ada perlindungan Allah yang menyertaimu.'
-    ]
+      'rejeki lu ga bakal ketuker bro sumpah, ikhtiar tipis2 aja trs tawakal.',
+      'bismillah pintu rezeki yg ga terduga lg otw kearah lu!',
+      'sukses trs usahanya yaa bro!'
+    ],
+    audioUrl: 'https://everyayah.com/data/Alafasy_128kbps/065002.mp3'
   },
   {
     id: 'curated-rum-21',
@@ -299,43 +216,25 @@ export const CURATED_VERSES: CuratedVerse[] = [
     surahName: 'Ar-Rum',
     surahArabic: 'الروم',
     verseNumber: 21,
-    arabicText: 'وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا لِتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِقَوْمٍ يَتَفَكَّرُونَ',
-    translation: 'Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang...',
+    arabicText: 'وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا لِتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَوَدَّةً وَرَحْمَةً',
+    translation: 'Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang.',
     themeCategory: 'cinta',
     themeLabel: 'Cinta, Sakinah & Kasih Sayang',
     contextNote: 'Ayat penuh kehangatan tentang ketenteraman dan cinta kasih yang dianugerahkan Allah.',
     suggestedMessages: [
-      'Semoga cinta dan ketenangan selalu bersemi di antara kita.',
-      'Bersamamu, hatiku menemukan tempat pulang yang tenang.',
-      'Terima kasih telah menjadi berkah dan anugerah terindah dalam hidupku.'
-    ]
-  },
-  {
-    id: 'curated-ashr-1-3',
-    surahNumber: 103,
-    surahName: "Al-'Asr",
-    surahArabic: 'العصر',
-    verseNumber: '1 - 3',
-    arabicText: 'وَالْعَصْرِ ۝ إِنَّ الْإِنْسَانَ لَفِي خُسْرٍ ۝ إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ',
-    translation: 'Demi masa. Sungguh, manusia berada dalam kerugian, kecuali orang-orang yang beriman dan mengerjakan kebajikan serta saling menasihati untuk kebenaran dan saling menasihati untuk kesabaran.',
-    themeCategory: 'doa',
-    themeLabel: 'Persahabatan & Saling Mengingatkan',
-    contextNote: 'Pesan persahabatan sejati yang saling menggenggam tangan dalam kebaikan dan kesabaran.',
-    suggestedMessages: [
-      'Terima kasih selalu menjadi sahabat yang saling mengingatkan dalam kebaikan.',
-      'Semoga persahabatan kita terjaga hingga ke surga-Nya.',
-      'Saling mendoakan dalam diam adalah hadiah terbaik yang bisa kuberikan untukmu.'
-    ]
+      'makasih yaa udah hadir & selalu jd penenang hariku yg chaos.',
+      'semoga kita selalu dijaga bareng2 trs yaa aamiin.',
+      'cuma mau blg bersyukur bgt bsa kenal lu hehe.'
+    ],
+    audioUrl: 'https://everyayah.com/data/Alafasy_128kbps/030021.mp3'
   }
 ];
 
 // Theme category pills
 export const THEME_CATEGORIES = [
-  { id: 'all', label: 'Semua Tema', icon: 'Sparkles' },
-  { id: 'ketenangan', label: 'Ketenangan Hati', icon: 'HeartHandshake' },
-  { id: 'ujian', label: 'Saat Berjuang / Ujian', icon: 'Shield' },
-  { id: 'harapan', label: 'Harapan & Rezeki', icon: 'SunMedium' },
-  { id: 'syukur', label: 'Rasa Syukur', icon: 'Smile' },
-  { id: 'cinta', label: 'Cinta & Pasangan', icon: 'Heart' },
-  { id: 'doa', label: 'Doa & Perlindungan', icon: 'HandMetal' },
+  { id: 'all', label: 'Semua Tema' },
+  { id: 'ujian', label: 'Saat Berjuang / Ujian' },
+  { id: 'ketenangan', label: 'Ketenangan Hati' },
+  { id: 'harapan', label: 'Harapan & Rezeki' },
+  { id: 'cinta', label: 'Cinta & Doa' },
 ];

@@ -20,7 +20,7 @@ export default function Hero({
   onScrollToFeed,
 }: HeroProps) {
   const featured = CURATED_VERSES[0];
-  const popularNames = ['Dinda', 'Ibu', 'Fajar', 'Diriku Sendiri', 'Zahra', 'Adit', 'Overthinking'];
+  const popularNames = ['Dinda', 'Mama', 'Fajar', 'Zahra', 'diri sendiri'];
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,7 +36,7 @@ export default function Hero({
         {/* Top Minimal Badge */}
         <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-900/10 border border-emerald-900/15 text-emerald-950 text-xs font-semibold tracking-wide mb-4">
           <Sparkles className="w-3.5 h-3.5 text-emerald-800" />
-          <span>Terinspirasi dari konsep SendTheSong — khusus ayat Al-Qur’an</span>
+          <span>SendTheSong — versi ayat Al-Qur’an & doa tulus</span>
         </div>
 
         {/* Hero Headline */}
@@ -59,7 +59,7 @@ export default function Hero({
               type="text"
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
-              placeholder="Cari pesan untuk namamu (misal: Dinda, Ibu, Fajar, Zahra)..."
+              placeholder="Cari pesan untuk namamu (misal: Dinda, Mama, Fajar, Zahra)..."
               className="w-full pl-12 pr-28 py-3.5 sm:py-4 rounded-full bg-white border-2 border-zinc-200/90 shadow-sm focus:outline-none focus:border-emerald-800 focus:ring-4 focus:ring-emerald-800/10 text-xs sm:text-sm text-zinc-900 placeholder:text-zinc-400 transition-all"
             />
             <button
@@ -128,7 +128,7 @@ export default function Hero({
                   Contoh Pesan Terkirim:
                 </span>
                 <span className="text-base font-semibold text-zinc-900 font-serif-elegant">
-                  Untuk: Sahabat Terbaikku
+                  Untuk: Dinda
                 </span>
               </div>
               <span className="text-xs px-2.5 py-1 rounded-full bg-emerald-900/10 text-emerald-900 font-semibold border border-emerald-900/15">
@@ -159,11 +159,11 @@ export default function Hero({
 
             {/* Personal Letter Note */}
             <div className="p-3.5 rounded-xl bg-[#F4F4EE] border border-[#E3E2D6] text-xs text-zinc-700 italic font-serif-elegant leading-relaxed">
-              &quot;Buat kamu yang lagi capek berjuang hari ini, ingat ya: janji Allah itu pasti, kemudahan itu disiapkan bersamaan dengan kesulitan ini. Istirahat ya.&quot;
+              &quot;din, jujur wkwk msih suka kepikiran masa2 dulu. skrg dh beda bgt y hidup kita. smg lu sllu dapet yg tulus & bahagia terus sm pilihan lu skrg yaaa. ayat ini sllu ngingetin gw sm doa baik bwt lu.&quot;
             </div>
 
             <div className="mt-3 pt-2 border-t border-zinc-100 flex items-center justify-between text-[11px] text-zinc-400">
-              <span>Dari: Seseorang yang mendoakanmu</span>
+              <span>Dari: anon mantan lu yg cringe</span>
               <button
                 type="button"
                 onClick={() => onStartSend(featured)}
