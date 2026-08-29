@@ -18,13 +18,13 @@ export default function CuratedFeed({ onSelectVerse }: CuratedFeedProps) {
     : CURATED_VERSES.filter((v) => v.themeCategory === activeFilter);
 
   return (
-    <section className="py-14 sm:py-20 border-b border-[#EBE8DF]">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="text-center max-w-xl mx-auto mb-10 space-y-2">
-          <span className="text-xs uppercase tracking-widest font-semibold text-emerald-900 bg-emerald-100/70 px-3 py-1 rounded-full border border-emerald-200">
+    <section className="py-10 sm:py-16 md:py-20 border-b border-[#EBE8DF]">
+      <div className="max-w-5xl mx-auto px-3.5 sm:px-6">
+        <div className="text-center max-w-xl mx-auto mb-6 sm:mb-10 space-y-2">
+          <span className="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-emerald-900 bg-emerald-100/70 px-3 py-1 rounded-full border border-emerald-200">
             Inspirasi Ayat Penyejuk Jiwa
           </span>
-          <h2 className="text-2xl sm:text-3xl font-semibold text-zinc-900 font-serif-elegant">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-zinc-900 font-serif-elegant">
             Temukan Ayat yang Berbicara pada Hatimu
           </h2>
           <p className="text-xs sm:text-sm text-zinc-600">
@@ -33,7 +33,7 @@ export default function CuratedFeed({ onSelectVerse }: CuratedFeedProps) {
         </div>
 
         {/* Filters */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
+        <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-6 sm:mb-8">
           {[
             { id: 'all', label: 'Semua Ayat' },
             { id: 'ketenangan', label: 'Ketenangan Jiwa' },
@@ -47,7 +47,7 @@ export default function CuratedFeed({ onSelectVerse }: CuratedFeedProps) {
               id={`feed-filter-${tab.id}`}
               type="button"
               onClick={() => setActiveFilter(tab.id as any)}
-              className={`px-3.5 py-1.5 rounded-full text-xs transition-all ${
+              className={`px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[11px] sm:text-xs transition-all active:scale-95 ${
                 activeFilter === tab.id
                   ? 'bg-emerald-900 text-white font-medium shadow-xs'
                   : 'bg-white text-zinc-700 hover:bg-zinc-100 border border-zinc-200'

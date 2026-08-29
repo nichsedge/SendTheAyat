@@ -73,16 +73,16 @@ export default function CommunityFeed({
   };
 
   return (
-    <section id="community-feed-section" className="py-12 sm:py-16">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <section id="community-feed-section" className="py-10 sm:py-16">
+      <div className="max-w-6xl mx-auto px-3.5 sm:px-6">
         {/* Section Header & Subtitle */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 pb-4 border-b border-[#E8E5DA]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8 pb-4 border-b border-[#E8E5DA]">
           <div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-900/10 text-emerald-900 text-xs font-semibold mb-2">
               <MessageSquare className="w-3.5 h-3.5" />
               <span>Pesan & Doa Komunitas</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-semibold text-zinc-900 font-serif-elegant">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-zinc-900 font-serif-elegant">
               Jelajahi Pesan untuk Nama Seseorang
             </h2>
             <p className="text-xs sm:text-sm text-zinc-600 mt-1">
@@ -96,7 +96,7 @@ export default function CommunityFeed({
               id="sort-latest-btn"
               type="button"
               onClick={() => setSelectedSort('latest')}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
+              className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all active:scale-95 ${
                 selectedSort === 'latest'
                   ? 'bg-emerald-900 text-white shadow-xs'
                   : 'bg-white text-zinc-700 hover:bg-zinc-100 border border-zinc-200'
@@ -108,7 +108,7 @@ export default function CommunityFeed({
               id="sort-popular-btn"
               type="button"
               onClick={() => setSelectedSort('popular')}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
+              className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all active:scale-95 ${
                 selectedSort === 'popular'
                   ? 'bg-emerald-900 text-white shadow-xs'
                   : 'bg-white text-zinc-700 hover:bg-zinc-100 border border-zinc-200'
@@ -121,14 +121,14 @@ export default function CommunityFeed({
 
         {/* Filter State Display */}
         {searchQuery && (
-          <div className="mb-6 flex items-center justify-between bg-emerald-50 border border-emerald-200/80 px-4 py-2.5 rounded-xl text-xs text-emerald-950">
+          <div className="mb-5 flex flex-wrap items-center justify-between gap-2 bg-emerald-50 border border-emerald-200/80 px-3.5 py-2.5 rounded-xl text-xs text-emerald-950">
             <span>
               Menampilkan pesan untuk: <strong className="underline">&quot;{searchQuery}&quot;</strong> ({filteredMessages.length} pesan ditemukan)
             </span>
             <button
               type="button"
               onClick={() => onSearchChange('')}
-              className="text-xs font-semibold text-emerald-800 hover:text-emerald-950 underline ml-3"
+              className="text-xs font-semibold text-emerald-800 hover:text-emerald-950 underline active:scale-95"
             >
               Reset Pencarian
             </button>

@@ -160,7 +160,7 @@ export default function AyatPicker({ initialMood, onSelectVerse, onBackToHome }:
       </div>
 
       {/* Search & Filter Bar */}
-      <div className="space-y-3 mb-6 sm:mb-8">
+      <div className="space-y-3 mb-5 sm:mb-8">
         <div className="relative">
           <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
@@ -170,16 +170,16 @@ export default function AyatPicker({ initialMood, onSelectVerse, onBackToHome }:
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={
               activeTab === 'curated'
-                ? 'Cari ayat (contoh: sabar, kesulitan, rezeki, hati, syukur)...'
+                ? 'Cari ayat (sabar, kesulitan, rezeki, hati)...'
                 : 'Cari surah (contoh: Yasin, Al-Kahf, 67)...'
             }
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-emerald-800/20 focus:border-emerald-800 text-sm text-zinc-900 placeholder:text-zinc-400 transition-all shadow-2xs"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-emerald-800/20 focus:border-emerald-800 text-base sm:text-sm text-zinc-900 placeholder:text-zinc-400 transition-all shadow-2xs"
           />
           {searchQuery && (
             <button
               type="button"
               onClick={() => setSearchQuery('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-zinc-400 hover:text-zinc-700"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-zinc-400 hover:text-zinc-700 active:scale-95"
             >
               Hapus
             </button>
@@ -375,14 +375,14 @@ export default function AyatPicker({ initialMood, onSelectVerse, onBackToHome }:
                     <label className="text-[11px] font-semibold text-zinc-600 uppercase tracking-wider block mb-1.5">
                       Pilih Nomor Ayat (1 - {surahDetail.jumlahAyat}):
                     </label>
-                    <div className="flex flex-wrap gap-1 max-h-24 sm:max-h-28 overflow-y-auto p-1 bg-zinc-50 rounded-xl border border-zinc-100">
+                    <div className="flex flex-wrap gap-1.5 max-h-28 sm:max-h-32 overflow-y-auto p-1.5 bg-zinc-50 rounded-xl border border-zinc-100">
                       {surahDetail.ayat.map((ay) => (
                         <button
                           key={ay.nomorAyat}
                           id={`verse-pill-${ay.nomorAyat}`}
                           type="button"
                           onClick={() => setSelectedVerseNumber(ay.nomorAyat)}
-                          className={`w-7 h-7 rounded-lg text-xs font-medium transition-all active:scale-95 ${
+                          className={`w-8 h-8 rounded-lg text-xs font-medium transition-all active:scale-95 flex items-center justify-center ${
                             selectedVerseNumber === ay.nomorAyat
                               ? 'bg-emerald-900 text-white font-bold shadow-2xs'
                               : 'bg-white text-zinc-700 border border-zinc-200 hover:bg-zinc-100'

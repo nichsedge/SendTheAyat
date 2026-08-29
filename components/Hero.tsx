@@ -28,25 +28,25 @@ export default function Hero({
   };
 
   return (
-    <section className="relative overflow-hidden pt-6 pb-12 sm:pt-12 sm:pb-16 md:pt-16 md:pb-20 border-b border-[#EAE7DD]">
+    <section className="relative overflow-hidden pt-5 pb-10 sm:pt-12 sm:pb-16 md:pt-16 md:pb-20 border-b border-[#EAE7DD]">
       {/* Background ambient glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[600px] h-[300px] sm:h-[380px] bg-emerald-100/40 blur-[100px] pointer-events-none rounded-full" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[250px] sm:h-[380px] bg-emerald-100/40 blur-[90px] pointer-events-none rounded-full" />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 text-center">
+      <div className="max-w-4xl mx-auto px-3.5 sm:px-6 relative z-10 text-center">
         {/* Top Minimal Badge */}
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-900/10 border border-emerald-900/15 text-emerald-950 text-[11px] sm:text-xs font-semibold tracking-wide mb-3 sm:mb-4">
-          <Sparkles className="w-3.5 h-3.5 text-emerald-800 shrink-0" />
-          <span>SendTheSong — versi ayat Al-Qur’an & doa</span>
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-900/10 border border-emerald-900/15 text-emerald-950 text-[10px] sm:text-xs font-semibold tracking-wide mb-3 sm:mb-4 max-w-full">
+          <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-800 shrink-0" />
+          <span className="truncate">SendTheSong — versi ayat Al-Qur’an & doa</span>
         </div>
 
         {/* Hero Headline */}
-        <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 font-serif-elegant leading-[1.2] mb-3 sm:mb-4 px-1">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 font-serif-elegant leading-[1.25] sm:leading-[1.2] mb-2.5 sm:mb-4 px-1">
           Sampaikan ceritamu, <br className="hidden sm:inline" />
           <span className="italic font-normal text-emerald-950">lewat lantunan ayat Al-Qur’an.</span>
         </h1>
 
         {/* Subtitle */}
-        <p className="text-xs sm:text-sm md:text-base text-zinc-600 font-normal leading-relaxed max-w-xl mx-auto mb-6 sm:mb-8 px-2">
+        <p className="text-xs sm:text-sm md:text-base text-zinc-600 font-normal leading-relaxed max-w-xl mx-auto mb-5 sm:mb-8 px-1">
           Kirimkan pesan personal, doa tulus, atau curahan hati yang disematkan bersama ayat Al-Qur&apos;an penyejuk jiwa. Cari namamu atau tulis untuk orang tersayang.
         </p>
 
@@ -59,39 +59,41 @@ export default function Hero({
               type="text"
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
-              placeholder="Cari pesan untuk namamu (Dinda, Mama, Fajar)..."
-              className="w-full pl-10 sm:pl-12 pr-24 sm:pr-28 py-3 sm:py-3.5 rounded-full bg-white border-2 border-zinc-200/90 shadow-xs focus:outline-none focus:border-emerald-800 focus:ring-4 focus:ring-emerald-800/10 text-xs sm:text-sm text-zinc-900 placeholder:text-zinc-400 transition-all"
+              placeholder="Cari pesan untuk namamu (Dinda, Mama)..."
+              className="w-full pl-9 sm:pl-12 pr-24 sm:pr-28 py-2.5 sm:py-3.5 rounded-full bg-white border-2 border-zinc-200/90 shadow-xs focus:outline-none focus:border-emerald-800 focus:ring-4 focus:ring-emerald-800/10 text-xs sm:text-sm text-zinc-900 placeholder:text-zinc-400 transition-all"
             />
             <button
               id="btn-hero-search-submit"
               type="submit"
-              className="absolute right-1.5 top-1/2 -translate-y-1/2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-emerald-900 hover:bg-emerald-950 text-white text-xs font-medium transition-all shadow-xs active:scale-95"
+              className="absolute right-1.5 top-1/2 -translate-y-1/2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-emerald-900 hover:bg-emerald-950 text-white text-xs font-medium transition-all shadow-xs active:scale-95 shrink-0"
             >
               Cari Nama
             </button>
           </form>
 
           {/* Quick Name Filter Tags */}
-          <div className="mt-3 flex flex-wrap items-center justify-center gap-1.5 text-xs text-zinc-500 px-1">
-            <span className="text-[11px] font-medium mr-0.5 opacity-80">Pencarian populer:</span>
-            {popularNames.map((name) => (
-              <button
-                key={name}
-                id={`pill-name-${name.toLowerCase().replace(/\s+/g, '-')}`}
-                type="button"
-                onClick={() => {
-                  onSearchChange(name);
-                  onScrollToFeed();
-                }}
-                className={`px-2.5 py-0.5 sm:py-1 rounded-full border text-[11px] transition-all active:scale-95 ${
-                  searchQuery.toLowerCase() === name.toLowerCase()
-                    ? 'bg-emerald-900 text-white border-emerald-900 font-semibold'
-                    : 'bg-white/90 hover:bg-white text-zinc-700 border-zinc-200/90'
-                }`}
-              >
-                {name}
-              </button>
-            ))}
+          <div className="mt-2.5 sm:mt-3 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-xs text-zinc-500 px-1">
+            <span className="text-[10px] sm:text-[11px] font-medium opacity-80 shrink-0">Pencarian populer:</span>
+            <div className="flex flex-wrap items-center justify-center gap-1.5">
+              {popularNames.map((name) => (
+                <button
+                  key={name}
+                  id={`pill-name-${name.toLowerCase().replace(/\s+/g, '-')}`}
+                  type="button"
+                  onClick={() => {
+                    onSearchChange(name);
+                    onScrollToFeed();
+                  }}
+                  className={`px-2.5 py-0.5 sm:py-1 rounded-full border text-[11px] transition-all active:scale-95 ${
+                    searchQuery.toLowerCase() === name.toLowerCase()
+                      ? 'bg-emerald-900 text-white border-emerald-900 font-semibold'
+                      : 'bg-white/90 hover:bg-white text-zinc-700 border-zinc-200/90 shadow-2xs'
+                  }`}
+                >
+                  {name}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -153,12 +155,12 @@ export default function Hero({
             </div>
 
             {/* Translation */}
-            <p className="text-xs text-zinc-600 font-serif-elegant italic leading-relaxed mb-3">
+            <p className="text-xs sm:text-sm text-zinc-600 font-serif-elegant italic leading-relaxed mb-3">
               &quot;{featured.translation}&quot;
             </p>
 
             {/* Personal Letter Note */}
-            <div className="p-3 sm:p-3.5 rounded-xl bg-[#F4F4EE] border border-[#E3E2D6] text-xs text-zinc-700 italic font-serif-elegant leading-relaxed">
+            <div className="p-3 sm:p-3.5 rounded-xl bg-[#F4F4EE] border border-[#E3E2D6] text-xs sm:text-sm text-zinc-700 italic font-serif-elegant leading-relaxed shadow-2xs">
               &quot;din, jujur wkwk msih suka kepikiran masa2 dulu. skrg dh beda bgt y hidup kita. smg lu sllu dapet yg tulus & bahagia terus sm pilihan lu skrg yaaa. ayat ini sllu ngingetin gw sm doa baik bwt lu.&quot;
             </div>
 

@@ -83,11 +83,11 @@ export default function CardComposer({
       </div>
 
       {/* Mobile Tab Switcher (Visible only on mobile) */}
-      <div className="lg:hidden flex p-1 rounded-xl bg-zinc-200/80 mb-5 text-xs font-semibold">
+      <div className="lg:hidden flex p-1 rounded-xl bg-zinc-200/80 mb-4 text-xs font-semibold">
         <button
           type="button"
           onClick={() => setMobileTab('form')}
-          className={`flex-1 py-2 rounded-lg transition-all flex items-center justify-center gap-1.5 ${
+          className={`flex-1 py-2 rounded-lg transition-all flex items-center justify-center gap-1.5 active:scale-95 ${
             mobileTab === 'form'
               ? 'bg-white text-zinc-900 shadow-2xs'
               : 'text-zinc-600 hover:text-zinc-900'
@@ -99,7 +99,7 @@ export default function CardComposer({
         <button
           type="button"
           onClick={() => setMobileTab('preview')}
-          className={`flex-1 py-2 rounded-lg transition-all flex items-center justify-center gap-1.5 ${
+          className={`flex-1 py-2 rounded-lg transition-all flex items-center justify-center gap-1.5 active:scale-95 ${
             mobileTab === 'preview'
               ? 'bg-white text-emerald-950 shadow-2xs'
               : 'text-zinc-600 hover:text-zinc-900'
@@ -110,16 +110,16 @@ export default function CardComposer({
         </button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-start">
         {/* Left Column: Form & Inputs */}
         <form
           onSubmit={handleSubmit}
-          className={`lg:col-span-6 space-y-4 sm:space-y-5 ${
+          className={`lg:col-span-6 space-y-3.5 sm:space-y-5 ${
             mobileTab === 'preview' ? 'hidden lg:block' : 'block'
           }`}
         >
           {/* Recipient Name */}
-          <div className="bg-white p-4 sm:p-5 rounded-2xl border border-zinc-200 shadow-xs space-y-2">
+          <div className="bg-white p-3.5 sm:p-5 rounded-2xl border border-zinc-200 shadow-xs space-y-2">
             <label className="text-xs font-semibold text-zinc-700 uppercase tracking-wider flex items-center justify-between">
               <span className="flex items-center gap-1.5">
                 <User className="w-3.5 h-3.5 text-emerald-800" />
@@ -133,9 +133,9 @@ export default function CardComposer({
               required
               value={recipientName}
               onChange={(e) => setRecipientName(e.target.value)}
-              placeholder="Contoh: Dinda, Mama, Fajar, Zahra, diri sendiri..."
+              placeholder="Contoh: Dinda, Mama, Fajar, Zahra..."
               maxLength={60}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-800/20 focus:border-emerald-800 placeholder:text-zinc-400 font-medium"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-800/20 focus:border-emerald-800 placeholder:text-zinc-400 font-medium"
             />
             <p className="text-[11px] text-zinc-400">
               Nama ini akan tampil di bagian atas kartu dan dapat dicari di halaman utama.
@@ -143,7 +143,7 @@ export default function CardComposer({
           </div>
 
           {/* Attached Ayat Widget / Selector */}
-          <div className="bg-white p-4 sm:p-5 rounded-2xl border border-zinc-200 shadow-xs space-y-2.5">
+          <div className="bg-white p-3.5 sm:p-5 rounded-2xl border border-zinc-200 shadow-xs space-y-2.5">
             <div className="flex items-center justify-between gap-2">
               <label className="text-xs font-semibold text-zinc-700 uppercase tracking-wider flex items-center gap-1.5 truncate">
                 <BookOpen className="w-3.5 h-3.5 text-emerald-800 shrink-0" />
@@ -188,7 +188,7 @@ export default function CardComposer({
           </div>
 
           {/* Personal Message */}
-          <div className="bg-white p-4 sm:p-5 rounded-2xl border border-zinc-200 shadow-xs space-y-2.5">
+          <div className="bg-white p-3.5 sm:p-5 rounded-2xl border border-zinc-200 shadow-xs space-y-2.5">
             <div className="flex items-center justify-between">
               <label className="text-xs font-semibold text-zinc-700 uppercase tracking-wider flex items-center gap-1.5">
                 <MessageSquare className="w-3.5 h-3.5 text-emerald-800" />
@@ -206,7 +206,7 @@ export default function CardComposer({
               onChange={(e) => setPersonalNote(e.target.value)}
               placeholder="Tuliskan ungkapan perasaan, doa, atau alasan kenapa kamu memilih ayat ini untuknya..."
               maxLength={300}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-800/20 focus:border-emerald-800 placeholder:text-zinc-400 resize-none font-serif-elegant leading-relaxed"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-800/20 focus:border-emerald-800 placeholder:text-zinc-400 resize-none font-serif-elegant leading-relaxed"
             />
 
             {/* Quick Inspiration Pills */}
@@ -214,13 +214,13 @@ export default function CardComposer({
               <span className="text-[11px] text-zinc-500 font-medium block mb-1.5">
                 Inspirasi kalimat cepat:
               </span>
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-1.5">
                 {quickMessageSuggestions.map((suggestion, idx) => (
                   <button
                     key={idx}
                     type="button"
                     onClick={() => setPersonalNote(suggestion)}
-                    className="text-left text-[11px] px-2.5 py-1.5 rounded-lg bg-[#FAF9F5] hover:bg-emerald-50 hover:text-emerald-900 text-zinc-600 border border-zinc-200/80 transition-colors line-clamp-1 italic active:scale-[0.99]"
+                    className="text-left text-[11px] px-2.5 py-1.5 rounded-lg bg-[#FAF9F5] hover:bg-emerald-50 hover:text-emerald-900 text-zinc-600 border border-zinc-200/80 transition-colors line-clamp-2 italic active:scale-[0.99]"
                   >
                     &quot;{suggestion}&quot;
                   </button>
@@ -230,7 +230,7 @@ export default function CardComposer({
           </div>
 
           {/* Sender Name */}
-          <div className="bg-white p-4 sm:p-5 rounded-2xl border border-zinc-200 shadow-xs space-y-2">
+          <div className="bg-white p-3.5 sm:p-5 rounded-2xl border border-zinc-200 shadow-xs space-y-2">
             <label className="text-xs font-semibold text-zinc-700 uppercase tracking-wider flex items-center gap-1.5">
               <User className="w-3.5 h-3.5 text-emerald-800" />
               <span>Pengirim Pesan (From: - Opsional)</span>
@@ -242,7 +242,7 @@ export default function CardComposer({
               onChange={(e) => setSenderName(e.target.value)}
               placeholder="Contoh: anon, sohib lu, atau nama panggilan"
               maxLength={50}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-800/20 focus:border-emerald-800 placeholder:text-zinc-400"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-800/20 focus:border-emerald-800 placeholder:text-zinc-400"
             />
             <p className="text-[11px] text-zinc-400">
               Bisa anonim (seperti &quot;Seseorang yang mendoakanmu&quot;).
@@ -250,7 +250,7 @@ export default function CardComposer({
           </div>
 
           {/* Theme Selector */}
-          <div className="bg-white p-4 sm:p-5 rounded-2xl border border-zinc-200 shadow-xs space-y-2.5">
+          <div className="bg-white p-3.5 sm:p-5 rounded-2xl border border-zinc-200 shadow-xs space-y-2.5">
             <label className="text-xs font-semibold text-zinc-700 uppercase tracking-wider flex items-center gap-1.5">
               <Palette className="w-3.5 h-3.5 text-emerald-800" />
               <span>Pilihan Nuansa Kartu</span>

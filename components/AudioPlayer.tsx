@@ -149,7 +149,7 @@ export default function AudioPlayer({
   return (
     <div
       onClick={(e) => e.stopPropagation()}
-      className={`flex flex-wrap items-center justify-between gap-3 px-3.5 py-2.5 rounded-2xl border text-xs transition-all max-w-full ${themeClass}`}
+      className={`w-full flex items-center justify-between gap-2.5 sm:gap-3 px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl border text-xs transition-all ${themeClass}`}
     >
       <audio
         ref={audioRef}
@@ -160,35 +160,40 @@ export default function AudioPlayer({
         preload="none"
       />
 
-      <div className="flex items-center gap-2.5 shrink-0">
-        <button
-          id="audio-play-button-full"
-          type="button"
-          onClick={togglePlay}
-          aria-label={isPlaying ? 'Jeda Tilawah' : 'Putar Tilawah'}
-          className="w-8 h-8 rounded-full bg-emerald-800 text-white flex items-center justify-center hover:bg-emerald-900 transition-transform active:scale-95 shadow-xs shrink-0"
-        >
-          {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 ml-0.5" />}
-        </button>
+      {/* Play Button */}
+      <button
+        id="audio-play-button-full"
+        type="button"
+        onClick={togglePlay}
+        aria-label={isPlaying ? 'Jeda Tilawah' : 'Putar Tilawah'}
+        className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-emerald-800 text-white flex items-center justify-center hover:bg-emerald-900 transition-transform active:scale-95 shadow-xs shrink-0"
+      >
+        {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 ml-0.5" />}
+      </button>
 
-        <div className="flex flex-col min-w-[110px] sm:min-w-[150px] max-w-[200px]">
-          <div className="flex justify-between items-center text-[10px] opacity-80 font-medium mb-1">
-            <span className="truncate">Tilawah {surahName ? `${surahName} : ${verseNumber}` : 'Ayat'}</span>
-            <span className="ml-2 shrink-0">{formatTime(currentTime)} / {formatTime(duration)}</span>
-          </div>
-          
-          {/* Progress Track */}
-          <div className="w-full h-1.5 bg-black/10 rounded-full overflow-hidden relative">
-            <div
-              className="h-full bg-emerald-800 rounded-full transition-all duration-150"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
+      {/* Middle Track Info */}
+      <div className="flex-1 min-w-0 flex flex-col justify-center">
+        <div className="flex justify-between items-center text-[10px] opacity-80 font-medium mb-1 gap-2">
+          <span className="truncate font-semibold">
+            Tilawah {surahName ? `${surahName} : ${verseNumber}` : 'Ayat'}
+          </span>
+          <span className="shrink-0 font-mono text-[9px] sm:text-[10px]">
+            {formatTime(currentTime)} / {formatTime(duration)}
+          </span>
+        </div>
+        
+        {/* Progress Track */}
+        <div className="w-full h-1.5 bg-black/10 rounded-full overflow-hidden relative">
+          <div
+            className="h-full bg-emerald-800 rounded-full transition-all duration-150"
+            style={{ width: `${progress}%` }}
+          />
         </div>
       </div>
 
-      <div className="flex items-center gap-2 shrink-0 ml-auto">
-        {/* Animated Wave Bars when playing */}
+      {/* Right Controls */}
+      <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+        {/* Animated Wave Bars when playing (visible on sm+) */}
         <div className="hidden sm:flex items-center gap-0.5 h-4 px-1">
           {[0.4, 0.9, 0.6, 1, 0.5, 0.8].map((height, i) => (
             <span
@@ -198,7 +203,7 @@ export default function AudioPlayer({
               }`}
               style={{
                 height: isPlaying ? `${height * 14}px` : '4px',
-                animationDelay: `${i * 120}ms`
+                animationDelay: `${i * 120}ms`,
               }}
             />
           ))}
@@ -209,18 +214,20 @@ export default function AudioPlayer({
           type="button"
           onClick={handleRestart}
           title="Ulangi dari awal"
-          className="p-1 hover:opacity-75 transition-opacity"
+          aria-label="Ulangi Tilawah"
+          className="p-1.5 hover:bg-black/5 rounded-lg text-emerald-950 transition-colors"
         >
-          <RotateCcw className="w-3.5 h-3.5 opacity-70" />
+          <RotateCcw className="w-3.5 h-3.5 opacity-70 hover:opacity-100" />
         </button>
         <button
           id="audio-mute-button"
           type="button"
           onClick={toggleMute}
           title={isMuted ? 'Nyalakan Suara' : 'Bisukan Suara'}
-          className="p-1 hover:opacity-75 transition-opacity"
+          aria-label={isMuted ? 'Nyalakan Suara' : 'Bisukan Suara'}
+          className="p-1.5 hover:bg-black/5 rounded-lg text-emerald-950 transition-colors"
         >
-          {isMuted ? <VolumeX className="w-3.5 h-3.5 text-zinc-400" /> : <Volume2 className="w-3.5 h-3.5 opacity-70" />}
+          {isMuted ? <VolumeX className="w-3.5 h-3.5 text-zinc-400" /> : <Volume2 className="w-3.5 h-3.5 opacity-70 hover:opacity-100" />}
         </button>
       </div>
     </div>

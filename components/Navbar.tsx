@@ -32,50 +32,52 @@ export default function Navbar({
   return (
     <>
       <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-[#FAF9F5]/90 border-b border-[#EBE8DF]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-3.5 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-2">
           {/* Logo */}
           <button
             id="nav-logo-button"
             type="button"
             onClick={onGoHome}
-            className="flex items-center gap-2.5 group text-left transition-opacity hover:opacity-90"
+            className="flex items-center gap-2 group text-left transition-opacity hover:opacity-90 shrink-0"
           >
-            <div className="w-8 h-8 rounded-full bg-emerald-900/10 border border-emerald-900/20 flex items-center justify-center text-emerald-900 transition-transform group-hover:scale-105">
-              <span className="font-arabic text-sm leading-none font-bold">ق</span>
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-emerald-900/10 border border-emerald-900/20 flex items-center justify-center text-emerald-900 transition-transform group-hover:scale-105">
+              <span className="font-arabic text-xs sm:text-sm leading-none font-bold">ق</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-base font-semibold tracking-tight text-zinc-900 flex items-center gap-1.5">
+              <span className="text-sm sm:text-base font-semibold tracking-tight text-zinc-900 flex items-center gap-1.5">
                 KirimAyat
-                <span className="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-full bg-emerald-100/80 text-emerald-800 border border-emerald-200">
+                <span className="hidden sm:inline-flex text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-full bg-emerald-100/80 text-emerald-800 border border-emerald-200">
                   Ayat & Pesan
                 </span>
               </span>
-              <span className="text-[11px] text-zinc-500 hidden sm:inline">
+              <span className="text-[11px] text-zinc-500 hidden md:inline">
                 Sampaikan ayat penuh makna untuk orang tersayang
               </span>
             </div>
           </button>
 
           {/* Nav Actions */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-2.5">
             <button
               id="nav-explore-ayat-btn"
               type="button"
               onClick={onOpenVersePicker}
-              className="px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-700 hover:text-zinc-950 hover:bg-zinc-200/50 transition-colors flex items-center gap-1.5"
+              className="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-700 hover:text-zinc-950 hover:bg-zinc-200/50 transition-colors flex items-center gap-1.5 active:scale-95"
             >
-              <BookOpen className="w-3.5 h-3.5 text-emerald-800" />
-              <span>Jelajah Ayat</span>
+              <BookOpen className="w-3.5 h-3.5 text-emerald-800 shrink-0" />
+              <span className="hidden xs:inline sm:inline">Jelajah</span>
+              <span className="hidden sm:inline">Ayat</span>
             </button>
 
             <button
               id="nav-history-btn"
               type="button"
               onClick={openHistoryModal}
-              className="px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-700 hover:text-zinc-950 hover:bg-zinc-200/50 transition-colors flex items-center gap-1.5"
+              className="p-1.5 sm:px-3 sm:py-1.5 rounded-lg text-xs font-medium text-zinc-700 hover:text-zinc-950 hover:bg-zinc-200/50 transition-colors flex items-center gap-1.5 active:scale-95"
               title="Pesan Tersimpan & Terkirim"
+              aria-label="Pesan Tersimpan"
             >
-              <Bookmark className="w-3.5 h-3.5 text-amber-700" />
+              <Bookmark className="w-3.5 h-3.5 text-amber-700 shrink-0" />
               <span className="hidden sm:inline">Tersimpan</span>
             </button>
 
@@ -83,9 +85,9 @@ export default function Navbar({
               id="nav-cta-kirim-btn"
               type="button"
               onClick={onStartCompose}
-              className="px-3.5 py-1.5 rounded-full text-xs font-medium bg-emerald-900 text-white hover:bg-emerald-950 transition-all shadow-xs active:scale-95 flex items-center gap-1.5"
+              className="px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-medium bg-emerald-900 text-white hover:bg-emerald-950 transition-all shadow-xs active:scale-95 flex items-center gap-1.5 shrink-0"
             >
-              <Send className="w-3 h-3" />
+              <Send className="w-3 h-3 shrink-0" />
               <span>Kirim Ayat</span>
             </button>
           </div>

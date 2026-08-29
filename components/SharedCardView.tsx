@@ -246,7 +246,7 @@ export default function SharedCardView({
               id="reaction-btn-aamiin"
               type="button"
               onClick={() => handleReaction('aamiin')}
-              className={`flex-1 sm:flex-none px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-medium transition-all flex items-center justify-center gap-1 active:scale-95 ${
+              className={`flex-1 sm:flex-none px-2 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-medium transition-all flex items-center justify-center gap-1 active:scale-95 ${
                 myReactions.aamiin
                   ? 'bg-emerald-800 text-white shadow-xs'
                   : 'bg-white/80 hover:bg-white text-zinc-800 border border-black/10'
@@ -260,7 +260,7 @@ export default function SharedCardView({
               id="reaction-btn-heart"
               type="button"
               onClick={() => handleReaction('heart')}
-              className={`flex-1 sm:flex-none px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-medium transition-all flex items-center justify-center gap-1 active:scale-95 ${
+              className={`flex-1 sm:flex-none px-2 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-medium transition-all flex items-center justify-center gap-1 active:scale-95 ${
                 myReactions.heart
                   ? 'bg-rose-700 text-white shadow-xs'
                   : 'bg-white/80 hover:bg-white text-zinc-800 border border-black/10'
@@ -274,7 +274,7 @@ export default function SharedCardView({
               id="reaction-btn-peace"
               type="button"
               onClick={() => handleReaction('peace')}
-              className={`flex-1 sm:flex-none px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-medium transition-all flex items-center justify-center gap-1 active:scale-95 ${
+              className={`flex-1 sm:flex-none px-2 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-medium transition-all flex items-center justify-center gap-1 active:scale-95 ${
                 myReactions.peace
                   ? 'bg-amber-700 text-white shadow-xs'
                   : 'bg-white/80 hover:bg-white text-zinc-800 border border-black/10'
