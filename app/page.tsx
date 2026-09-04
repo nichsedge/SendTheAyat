@@ -133,7 +133,7 @@ function MainAppContent() {
     setActiveMessage(msg);
     const token = encodeSharePayload(msg);
     const origin = typeof window !== 'undefined' ? window.location.origin : '';
-    setCurrentShareUrl(`${origin}/?p=${token}`);
+    setCurrentShareUrl(`${origin}/v/${msg.id}?p=${token}`);
     setIsCreator(false);
     setCurrentView('shared');
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -153,6 +153,7 @@ function MainAppContent() {
     senderName: string;
     personalNote: string;
     theme: CardThemeId;
+    isPrivate: boolean;
   }) => {
     setIsGenerating(true);
     try {
@@ -170,12 +171,14 @@ function MainAppContent() {
         translation: selectedVerse.translation,
         theme: formData.theme,
         audioUrl: selectedVerse.audioUrl,
+        isPrivate: formData.isPrivate,
         createdAt: Date.now(),
       };
 
       const token = encodeSharePayload(payload);
       const origin = typeof window !== 'undefined' ? window.location.origin : '';
-      const fullUrl = `${origin}/?p=${token}`;
+      // Share URL routes through /v/[id]?p=[token] for rich social preview & instant client hydration
+      const fullUrl = `${origin}/v/${payload.id}?p=${token}`;
 
       const fullMsg: PersonalMessage = {
         ...payload,
@@ -185,10 +188,13 @@ function MainAppContent() {
 
       // Save locally to user's history
       saveSentMessageLocally(fullMsg);
-      // Prepend to community messages state
-      setCommunityMessages((prev) => [fullMsg, ...prev.filter((m) => m.id !== fullMsg.id)]);
 
-      // Also persist on server memory store
+      // Only prepend to public community feed if not private
+      if (!formData.isPrivate) {
+        setCommunityMessages((prev) => [fullMsg, ...prev.filter((m) => m.id !== fullMsg.id)]);
+      }
+
+      // Also persist on server / Cloudflare D1
       fetch('/api/messages', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

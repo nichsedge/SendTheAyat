@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowLeft, Sparkles, Send, Check, Heart, Edit3, Palette, User, MessageSquare, Loader2, BookOpen, RefreshCw, Eye } from 'lucide-react';
+import { ArrowLeft, Sparkles, Send, Check, Heart, Edit3, Palette, User, MessageSquare, Loader2, BookOpen, RefreshCw, Eye, Lock, Globe } from 'lucide-react';
 import { CardThemeId, PersonalMessage } from '@/lib/types';
 import { CARD_THEMES } from '@/lib/themes';
 import AudioPlayer from './AudioPlayer';
@@ -24,6 +24,7 @@ interface CardComposerProps {
     senderName: string;
     personalNote: string;
     theme: CardThemeId;
+    isPrivate: boolean;
   }) => Promise<void>;
   isGenerating?: boolean;
 }
@@ -38,6 +39,7 @@ export default function CardComposer({
   const [senderName, setSenderName] = useState('');
   const [personalNote, setPersonalNote] = useState(verse.defaultNote || '');
   const [selectedTheme, setSelectedTheme] = useState<CardThemeId>('emerald-sand');
+  const [isPrivate, setIsPrivate] = useState(false);
   const [mobileTab, setMobileTab] = useState<'form' | 'preview'>('form');
 
   const themeConfig = CARD_THEMES[selectedTheme];
@@ -57,6 +59,7 @@ export default function CardComposer({
       senderName: senderName.trim() || 'Seseorang yang mendoakanmu',
       personalNote: personalNote.trim(),
       theme: selectedTheme,
+      isPrivate,
     });
   };
 
@@ -278,6 +281,57 @@ export default function CardComposer({
             </div>
           </div>
 
+          {/* Privacy & Visibility Selector */}
+          <div className="bg-white p-3.5 sm:p-5 rounded-2xl border border-zinc-200 shadow-xs space-y-2.5">
+            <label className="text-xs font-semibold text-zinc-700 uppercase tracking-wider flex items-center justify-between">
+              <span className="flex items-center gap-1.5">
+                {isPrivate ? <Lock className="w-3.5 h-3.5 text-amber-700" /> : <Globe className="w-3.5 h-3.5 text-emerald-800" />}
+                <span>Visibilitas Surat</span>
+              </span>
+              <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${isPrivate ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'}`}>
+                {isPrivate ? 'Privat' : 'Publik'}
+              </span>
+            </label>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={() => setIsPrivate(false)}
+                className={`p-3 rounded-xl border text-left transition-all active:scale-[0.98] ${
+                  !isPrivate
+                    ? 'border-emerald-800 bg-emerald-50/50 ring-1 ring-emerald-800'
+                    : 'border-zinc-200 bg-zinc-50/60 hover:bg-zinc-100/80 text-zinc-600'
+                }`}
+              >
+                <div className="flex items-center gap-2 font-medium text-xs text-zinc-900 mb-1">
+                  <Globe className={`w-3.5 h-3.5 ${!isPrivate ? 'text-emerald-800' : 'text-zinc-500'}`} />
+                  <span>Publik (Feed)</span>
+                </div>
+                <p className="text-[11px] text-zinc-500 leading-snug">
+                  Bisa dicari & dibaca di feed komunitas agar orang lain ikut mengaminkan.
+                </p>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setIsPrivate(true)}
+                className={`p-3 rounded-xl border text-left transition-all active:scale-[0.98] ${
+                  isPrivate
+                    ? 'border-amber-700 bg-amber-50/50 ring-1 ring-amber-700'
+                    : 'border-zinc-200 bg-zinc-50/60 hover:bg-zinc-100/80 text-zinc-600'
+                }`}
+              >
+                <div className="flex items-center gap-2 font-medium text-xs text-zinc-900 mb-1">
+                  <Lock className={`w-3.5 h-3.5 ${isPrivate ? 'text-amber-700' : 'text-zinc-500'}`} />
+                  <span>Privat / Rahasia</span>
+                </div>
+                <p className="text-[11px] text-zinc-500 leading-snug">
+                  Hanya bisa dibuka lewat link. Disembunyikan dari feed & pencarian.
+                </p>
+              </button>
+            </div>
+          </div>
+
           {/* Submit Button */}
           <button
             id="btn-create-share-link"
@@ -310,7 +364,11 @@ export default function CardComposer({
               <Sparkles className="w-3.5 h-3.5 text-emerald-800" />
               <span>Pratinjau Kartu Pesan</span>
             </span>
-            <span className="text-[11px] text-zinc-400">Tampilan penerima</span>
+            <div className="flex items-center gap-1.5">
+              <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${isPrivate ? 'bg-amber-100 text-amber-900 border border-amber-200' : 'bg-emerald-100 text-emerald-900 border border-emerald-200'}`}>
+                {isPrivate ? '🔒 Privat (Link Saja)' : '🌍 Publik'}
+              </span>
+            </div>
           </div>
 
           {/* Rendered Live Theme Card */}
@@ -330,9 +388,17 @@ export default function CardComposer({
                     {recipientName || 'Untuk Kamu'}
                   </h4>
                 </div>
-                <span className={`text-[10px] sm:text-[11px] px-2.5 py-0.5 sm:py-1 rounded-full font-semibold shrink-0 ${themeConfig.accentBadgeClass}`}>
-                  QS. {verse.surahName} : {verse.verseNumber}
-                </span>
+                <div className="flex items-center gap-1.5 shrink-0">
+                  {isPrivate && (
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-200/60 text-amber-950 font-medium flex items-center gap-1">
+                      <Lock className="w-2.5 h-2.5" />
+                      <span>Privat</span>
+                    </span>
+                  )}
+                  <span className={`text-[10px] sm:text-[11px] px-2.5 py-0.5 sm:py-1 rounded-full font-semibold shrink-0 ${themeConfig.accentBadgeClass}`}>
+                    QS. {verse.surahName} : {verse.verseNumber}
+                  </span>
+                </div>
               </div>
 
               {/* Audio if available */}

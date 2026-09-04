@@ -9,17 +9,27 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://sendtheayat.pages.dev'),
   title: "KirimAyat - Pesan Personal Ayat Al-Qur'an",
   description: "Kirimkan ayat Al-Qur'an penuh makna dan ketenangan disertai pesan personal untuk orang tersayang.",
   openGraph: {
     title: "KirimAyat - Pesan Personal Ayat Al-Qur'an",
     description: "Kirimkan ayat Al-Qur'an penuh makna dan ketenangan disertai pesan personal untuk orang tersayang.",
     type: 'website',
+    images: [
+      {
+        url: '/og-cover.png',
+        width: 1200,
+        height: 630,
+        alt: 'KirimAyat - Pesan Personal Ayat Al-Qur\'an',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: "KirimAyat - Pesan Personal Ayat Al-Qur'an",
     description: "Kirimkan ayat Al-Qur'an penuh makna dan ketenangan disertai pesan personal untuk orang tersayang.",
+    images: ['/og-cover.png'],
   },
 };
 

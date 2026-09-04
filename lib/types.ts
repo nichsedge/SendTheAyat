@@ -76,6 +76,7 @@ export interface PersonalMessage {
   theme: CardThemeId;
   audioUrl?: string;
   createdAt: number;
+  isPrivate?: boolean;
   views?: number;
   reactions?: {
     aamiin: number;

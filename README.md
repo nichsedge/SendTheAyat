@@ -26,7 +26,11 @@ Platform web modern yang mengadaptasi konsep viral **SendTheSong.xyz**, di mana 
    - 5 pilihan palet estetika: *Hening Zaitun, Mushaf Klasik, Putih Tenang, Senja Teduh, Malam Hening*.
    - Live synchronization preview saat mengetik.
 
-5. **Direct Sharing & Interaction**:
+5. **Direct Sharing, Story Export & Interaction**:
+   - **Ekspor Story 9:16 (Instagram & WhatsApp Status)**: Format vertikal khusus layar HP (1080 × 1920) dengan kaligrafi Arab menawan dan tipografi elegan.
+   - **Ekspor Format Feed (1:1)**: Format kartu klasik untuk arsip dan galeri.
+   - **Surat Privat / Rahasia (Unlisted)**: Pilihan untuk menyembunyikan surat dari feed komunitas publik (hanya bisa dibuka oleh yang memiliki tautan).
+   - **Dynamic Social Preview (OpenGraph / Twitter Cards)**: Cloudflare Pages Function `/v/[id]` yang menyajikan preview WhatsApp/Twitter dengan nama penerima dan kutipan ayat.
    - URL-safe encoded share links (`/?p=...` dan `/v/[id]`).
    - Salin tautan satu klik & share WhatsApp otomatis dengan teks rapi.
    - Unduh kartu dalam format gambar PNG resolusi tinggi (`html-to-image`).

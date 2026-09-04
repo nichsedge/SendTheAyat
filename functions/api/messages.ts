@@ -42,6 +42,7 @@ export async function onRequestGet(context: any) {
         translation: row.translation,
         theme: row.theme,
         audioUrl: row.audio_url,
+        isPrivate: Boolean(row.is_private),
         views: row.views || 1,
         reactions: {
           aamiin: row.reactions_aamiin || 0,
@@ -56,11 +57,18 @@ export async function onRequestGet(context: any) {
       });
     }
 
-    let query = 'SELECT * FROM messages ORDER BY created_at DESC LIMIT ?';
+    // Attempt auto-migration of is_private column gracefully
+    try {
+      await db.prepare('ALTER TABLE messages ADD COLUMN is_private INTEGER DEFAULT 0').run();
+    } catch {
+      // Column may already exist, ignore error
+    }
+
+    let query = 'SELECT * FROM messages WHERE (is_private IS NULL OR is_private = 0) ORDER BY created_at DESC LIMIT ?';
     let bindings: any[] = [limit];
 
     if (q) {
-      query = 'SELECT * FROM messages WHERE LOWER(recipient_name) LIKE ? OR LOWER(sender_name) LIKE ? OR LOWER(personal_note) LIKE ? OR LOWER(surah_name) LIKE ? ORDER BY created_at DESC LIMIT ?';
+      query = 'SELECT * FROM messages WHERE (is_private IS NULL OR is_private = 0) AND (LOWER(recipient_name) LIKE ? OR LOWER(sender_name) LIKE ? OR LOWER(personal_note) LIKE ? OR LOWER(surah_name) LIKE ?) ORDER BY created_at DESC LIMIT ?';
       const term = `%${q}%`;
       bindings = [term, term, term, term, limit];
     }
@@ -81,6 +89,7 @@ export async function onRequestGet(context: any) {
       translation: row.translation,
       theme: row.theme,
       audioUrl: row.audio_url,
+      isPrivate: Boolean(row.is_private),
       views: row.views || 1,
       reactions: {
         aamiin: row.reactions_aamiin || 0,
@@ -107,6 +116,7 @@ export async function onRequestPost(context: any) {
     const body: any = await context.request.json();
     const id = body.id || `msg-${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 6)}`;
     const createdAt = body.createdAt || Date.now();
+    const isPrivate = body.isPrivate ? 1 : 0;
 
     if (!db) {
       return new Response(JSON.stringify({ success: false, error: 'D1 not bound', availableKeys: Object.keys(context.env || {}) }), {
@@ -115,13 +125,20 @@ export async function onRequestPost(context: any) {
       });
     }
 
+    // Auto-migrate column if not present yet
+    try {
+      await db.prepare('ALTER TABLE messages ADD COLUMN is_private INTEGER DEFAULT 0').run();
+    } catch {
+      // Column already exists
+    }
+
     await db.prepare(`
       INSERT OR REPLACE INTO messages (
         id, recipient_name, sender_name, personal_note,
         surah_number, surah_name, surah_arabic, surah_translation,
         verse_number, arabic_text, translation, theme, audio_url,
-        views, reactions_aamiin, reactions_heart, reactions_peace, created_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, 0, 0, 0, ?)
+        is_private, views, reactions_aamiin, reactions_heart, reactions_peace, created_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, 0, 0, 0, ?)
     `).bind(
       id,
       body.recipientName || 'Untukmu',
@@ -136,6 +153,7 @@ export async function onRequestPost(context: any) {
       body.translation || '',
       body.theme || 'emerald-sand',
       body.audioUrl || '',
+      isPrivate,
       createdAt
     ).run();
 

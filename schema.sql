@@ -16,5 +16,6 @@ CREATE TABLE IF NOT EXISTS messages (
   reactions_aamiin INTEGER DEFAULT 0,
   reactions_heart INTEGER DEFAULT 0,
   reactions_peace INTEGER DEFAULT 0,
+  is_private INTEGER DEFAULT 0,
   created_at INTEGER NOT NULL
 );

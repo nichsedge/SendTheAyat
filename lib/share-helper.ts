@@ -63,6 +63,7 @@ export function decodeSharePayload(encoded: string): PersonalMessage | null {
         translation: parsed.translation,
         theme: (parsed.theme as CardThemeId) || 'emerald-sand',
         audioUrl: parsed.audioUrl,
+        isPrivate: Boolean(parsed.isPrivate),
         createdAt: parsed.createdAt || Date.now(),
         reactions: parsed.reactions || { aamiin: 0, heart: 0, peace: 0 },
       };
