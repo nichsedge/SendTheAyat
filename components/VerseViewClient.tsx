@@ -45,8 +45,6 @@ export default function VerseViewClient({ id }: { id: string }) {
 
     const seed = INITIAL_COMMUNITY_MESSAGES.find(m => m.id === id);
     if (seed) {
-      setMessage(seed);
-      setIsLoading(false);
       return;
     }
 

@@ -15,6 +15,17 @@ interface CommunityFeedProps {
   onStartCompose: () => void;
 }
 
+function formatTimeAgo(timestamp: number) {
+  const diff = Date.now() - timestamp;
+  const mins = Math.floor(diff / (1000 * 60));
+  if (mins < 1) return 'Baru saja';
+  if (mins < 60) return `${mins} mnt lalu`;
+  const hours = Math.floor(mins / 60);
+  if (hours < 24) return `${hours} jam lalu`;
+  const days = Math.floor(hours / 24);
+  return `${days} hari lalu`;
+}
+
 export default function CommunityFeed({
   messages,
   searchQuery,
@@ -59,17 +70,6 @@ export default function CommunityFeed({
     navigator.clipboard.writeText(url);
     setCopiedId(msg.id);
     setTimeout(() => setCopiedId(null), 2000);
-  };
-
-  const formatTimeAgo = (timestamp: number) => {
-    const diff = Date.now() - timestamp;
-    const mins = Math.floor(diff / (1000 * 60));
-    if (mins < 1) return 'Baru saja';
-    if (mins < 60) return `${mins} mnt lalu`;
-    const hours = Math.floor(mins / 60);
-    if (hours < 24) return `${hours} jam lalu`;
-    const days = Math.floor(hours / 24);
-    return `${days} hari lalu`;
   };
 
   return (

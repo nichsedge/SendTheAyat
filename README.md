@@ -40,20 +40,39 @@ Platform web modern yang mengadaptasi konsep viral **SendTheSong.xyz**, di mana 
 ---
 
 ## 🛠️ Tech Stack & Standar
-
-- **Framework**: Next.js 15 (App Router, Standalone Output) + React 19 + TypeScript
+ 
+- **Framework**: Next.js 15 (App Router, Static Export SSG) + React 19 + TypeScript
 - **Styling**: Tailwind CSS v4 + Typography + Lucide Icons + Google Fonts (Amiri, Scheherazade New, Newsreader, Plus Jakarta Sans)
 - **Audio Recitation**: Mishary Rashid Alafasy High-Quality Recitations (EQuran API / Kemenag Dataset Mirror)
 - **Export & Effects**: `html-to-image`, `canvas-confetti`
+- **Deployment**: Cloudflare Pages (`out/` build output) + Cloudflare D1 + Pages Functions
 
 ---
 
-## 🚀 Menjalankan Project
+## 🚀 Menjalankan & Deployment
+
+### Pengembangan Lokal
 
 ```bash
-# Install dependensi
-bun install # atau npm install / pnpm install
+# Install dependensi (Bun direkomendasikan)
+bun install # atau npm install
 
 # Jalankan server pengembangan
 bun run dev # atau npm run dev
+
+# Jalankan linter
+bun run lint # atau npm run lint
 ```
+
+### Deployment ke Cloudflare Pages
+
+1. **Via Cloudflare Pages Git Integration (CI/CD)**:
+   - **Framework preset**: `None` / `Next.js (Static HTML Export)`
+   - **Build command**: `bun run build` (atau `npm run build`)
+   - **Build output directory**: `out`
+   - Node 22 dideteksi otomatis melalui `.node-version`.
+
+2. **Via Wrangler CLI Direct Upload**:
+   ```bash
+   bun run deploy
+   ```

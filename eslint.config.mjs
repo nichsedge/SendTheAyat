@@ -1,11 +1,10 @@
-import { defineConfig } from "eslint/config";
-import next from "eslint-config-next";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+import nextPlugin from "@next/eslint-plugin-next";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+export default [
+  {
+    ignores: [".next/**", "out/**", "node_modules/**"],
+  },
+  nextPlugin.flatConfig.recommended,
+  nextPlugin.flatConfig.coreWebVitals,
+];
 
-export default defineConfig([{
-    extends: [...next],
-}]);
